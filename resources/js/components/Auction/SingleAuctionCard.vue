@@ -1,5 +1,10 @@
 <template>
-    <v-card max-width="344" class="mx-auto mr-1 ml-1" outlined>
+    <v-card
+        max-width="344"
+        class="mx-auto mr-1 ml-1"
+        outlined
+        @click="auctionClicked(auction.id)"
+    >
         <!-- Title and start_date -->
         <v-list-item>
             <v-list-item-content>
@@ -21,23 +26,11 @@
 
         <!-- Details and participer btns -->
         <v-card-actions>
-            <!-- details btn -->
-            <router-link
-                :to="{
-                    name: 'auction-details',
-                    params: { id: auction.id }
-                }"
-            >
-                <v-btn text color="primary accent-4" small>
-                    Détails
-                </v-btn>
-            </router-link>
             <v-spacer></v-spacer>
-            <!-- Participer btn -->
             <v-btn color="success accent-4" depressed small>
                 Participer
-                <!-- <v-icon right dark>mdi-thumb-up-outline</v-icon> -->
             </v-btn>
+            <v-spacer></v-spacer>
         </v-card-actions>
     </v-card>
 </template>
@@ -50,6 +43,15 @@ export default {
         return {
             moment: moment
         };
+    },
+    methods: {
+        auctionClicked: function(auctionID) {
+            if (auctionID !== undefined)
+                this.$router.push({
+                    name: "auction-details",
+                    params: { id: auctionID }
+                });
+        }
     }
 };
 </script>

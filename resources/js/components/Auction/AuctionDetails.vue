@@ -22,17 +22,32 @@
 
             <v-card-text> {{ auction.product.desc }} </v-card-text>
 
+            <!-- btn participer -->
+            <v-container class="grey lighten-5">
+                <v-row class="mb-6" no-gutters>
+                    <v-col>
+                        <v-card class="pa-2 mx-auto" outlined tile>
+                            <v-btn
+                                color="success"
+                                class=""
+                                depressed
+                                small
+                                width="100%"
+                            >
+                                <span class="white--text">Participer</span>
+                                <!-- <v-icon class="white--text">mdi-heart</v-icon> -->
+                            </v-btn>
+                        </v-card>
+                    </v-col>
+                </v-row>
+            </v-container>
+
             <v-bottom-navigation horizontal height="40">
                 <v-btn text color="red" to="/">
                     <span>Retour</span>
                     <v-icon>keyboard_backspace</v-icon>
                 </v-btn>
                 <v-spacer></v-spacer>
-
-                <v-btn large dark color="success" depressed>
-                    <span class="white--text">Participer</span>
-                    <!-- <v-icon class="white--text">mdi-heart</v-icon> -->
-                </v-btn>
 
                 <v-btn color="primary">
                     <span class="white--text">0 / {{ auction.room_size }}</span>

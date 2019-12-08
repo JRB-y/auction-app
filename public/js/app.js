@@ -1933,6 +1933,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /** ===== import axios to get the current Auction from props id ===== **/
 
@@ -2008,13 +2023,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2023,6 +2031,16 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     return {
       moment: moment
     };
+  },
+  methods: {
+    auctionClicked: function auctionClicked(auctionID) {
+      if (auctionID !== undefined) this.$router.push({
+        name: "auction-details",
+        params: {
+          id: auctionID
+        }
+      });
+    }
   }
 });
 
@@ -2037,9 +2055,6 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
 //
 //
 //
@@ -2107,14 +2122,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SingleAuctionCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../SingleAuctionCard */ "./resources/js/components/Auction/SingleAuctionCard.vue");
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -20618,6 +20625,53 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c(
+            "v-container",
+            { staticClass: "grey lighten-5" },
+            [
+              _c(
+                "v-row",
+                { staticClass: "mb-6", attrs: { "no-gutters": "" } },
+                [
+                  _c(
+                    "v-col",
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "pa-2 mx-auto",
+                          attrs: { outlined: "", tile: "" }
+                        },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                color: "success",
+                                depressed: "",
+                                small: "",
+                                width: "100%"
+                              }
+                            },
+                            [
+                              _c("span", { staticClass: "white--text" }, [
+                                _vm._v("Participer")
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
             "v-bottom-navigation",
             { attrs: { horizontal: "", height: "40" } },
             [
@@ -20633,23 +20687,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("v-spacer"),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: {
-                    large: "",
-                    dark: "",
-                    color: "success",
-                    depressed: ""
-                  }
-                },
-                [
-                  _c("span", { staticClass: "white--text" }, [
-                    _vm._v("Participer")
-                  ])
-                ]
-              ),
               _vm._v(" "),
               _c(
                 "v-btn",
@@ -20701,7 +20738,12 @@ var render = function() {
     "v-card",
     {
       staticClass: "mx-auto mr-1 ml-1",
-      attrs: { "max-width": "344", outlined: "" }
+      attrs: { "max-width": "344", outlined: "" },
+      on: {
+        click: function($event) {
+          return _vm.auctionClicked(_vm.auction.id)
+        }
+      }
     },
     [
       _c(
@@ -20749,33 +20791,15 @@ var render = function() {
       _c(
         "v-card-actions",
         [
-          _c(
-            "router-link",
-            {
-              attrs: {
-                to: {
-                  name: "auction-details",
-                  params: { id: _vm.auction.id }
-                }
-              }
-            },
-            [
-              _c(
-                "v-btn",
-                { attrs: { text: "", color: "primary accent-4", small: "" } },
-                [_vm._v("\n                Détails\n            ")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
           _c(
             "v-btn",
             { attrs: { color: "success accent-4", depressed: "", small: "" } },
-            [_vm._v("\n            Participer\n            ")]
-          )
+            [_vm._v("\n            Participer\n        ")]
+          ),
+          _vm._v(" "),
+          _c("v-spacer")
         ],
         1
       )
@@ -20806,111 +20830,103 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-card",
+    { staticClass: "mb-4" },
     [
       _c(
-        "v-card",
+        "v-toolbar",
+        { attrs: { flat: "" } },
         [
-          _c("v-system-bar"),
-          _vm._v(" "),
           _c(
-            "v-toolbar",
-            { attrs: { flat: "" } },
+            "v-toolbar-title",
+            { staticClass: "font-weight-bold" },
             [
-              _c(
-                "v-toolbar-title",
-                [
-                  _vm._v(
-                    "\n                Enchères en cours\n                "
-                  ),
-                  _c("v-icon", { attrs: { small: "", color: "success" } }, [
-                    _vm._v(
-                      "\n                    mdi-checkbox-blank-circle\n                "
-                    )
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-spacer")
+              _c("v-icon", { attrs: { small: "", color: "success" } }, [
+                _vm._v(
+                  "\n                mdi-checkbox-blank-circle\n            "
+                )
+              ]),
+              _vm._v("\n            Enchères en cours\n        ")
             ],
             1
           ),
           _vm._v(" "),
-          _c("v-banner", { attrs: { "single-line": "", sticky: _vm.sticky } }, [
-            _vm._v(
-              "\n            Vous ne pouvez pas participez à une enchère en cours.\n        "
-            )
-          ]),
-          _vm._v(" "),
+          _c("v-spacer")
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-banner", { attrs: { "single-line": "", sticky: _vm.sticky } }, [
+        _vm._v(
+          "\n        Vous ne pouvez pas participez à une enchère en cours.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "v-card-text",
+        { staticClass: "grey lighten-4" },
+        [
           _c(
-            "v-card-text",
-            { staticClass: "grey lighten-4" },
+            "v-sheet",
+            { staticClass: "mx-auto" },
             [
               _c(
-                "v-sheet",
-                { staticClass: "mx-auto" },
-                [
-                  _c(
-                    "v-slide-group",
-                    {
-                      staticClass: "pa-4",
-                      attrs: { "show-arrows": "" },
-                      model: {
-                        value: _vm.model,
-                        callback: function($$v) {
-                          _vm.model = $$v
-                        },
-                        expression: "model"
-                      }
+                "v-slide-group",
+                {
+                  staticClass: "pa-4",
+                  attrs: { "show-arrows": "" },
+                  model: {
+                    value: _vm.model,
+                    callback: function($$v) {
+                      _vm.model = $$v
                     },
-                    _vm._l(10, function(n) {
-                      return _c("v-slide-item", {
-                        key: n,
-                        scopedSlots: _vm._u(
-                          [
-                            {
-                              key: "default",
-                              fn: function(ref) {
-                                var active = ref.active
-                                var toggle = ref.toggle
-                                return [
-                                  _c(
-                                    "v-card",
-                                    {
-                                      staticClass: "ma-4",
-                                      attrs: {
-                                        color: active
-                                          ? "pink lighten-2"
-                                          : "grey lighten-1",
-                                        height: "200",
-                                        width: "250"
-                                      },
-                                      on: { click: toggle }
-                                    },
-                                    [
-                                      _c("v-row", {
-                                        staticClass: "fill-height",
-                                        attrs: {
-                                          align: "center",
-                                          justify: "center"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ]
-                              }
-                            }
-                          ],
-                          null,
-                          true
-                        )
-                      })
-                    }),
-                    1
-                  )
-                ],
+                    expression: "model"
+                  }
+                },
+                _vm._l(10, function(n) {
+                  return _c("v-slide-item", {
+                    key: n,
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "default",
+                          fn: function(ref) {
+                            var active = ref.active
+                            var toggle = ref.toggle
+                            return [
+                              _c(
+                                "v-card",
+                                {
+                                  staticClass: "ma-4",
+                                  attrs: {
+                                    color: active
+                                      ? "pink lighten-2"
+                                      : "grey lighten-1",
+                                    height: "200",
+                                    width: "250"
+                                  },
+                                  on: { click: toggle }
+                                },
+                                [
+                                  _c("v-row", {
+                                    staticClass: "fill-height",
+                                    attrs: {
+                                      align: "center",
+                                      justify: "center"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  })
+                }),
                 1
               )
             ],
@@ -20946,72 +20962,54 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-card",
+    { staticClass: "mb-4" },
     [
       _c(
-        "v-card",
+        "v-toolbar",
+        { attrs: { flat: "" } },
         [
-          _c("v-system-bar"),
-          _vm._v(" "),
           _c(
-            "v-toolbar",
-            { attrs: { flat: "" } },
+            "v-toolbar-title",
+            { staticClass: "font-weight-bold" },
             [
-              _c(
-                "v-toolbar-title",
-                { staticClass: "font-weight-bold" },
-                [
-                  _c("v-icon", { attrs: { small: "", color: "warning" } }, [
-                    _vm._v(
-                      "\n                    mdi-checkbox-blank-circle\n                "
-                    )
-                  ]),
-                  _vm._v("\n                Enchères à venir "),
-                  _c("small", [_vm._v("(" + _vm._s(_vm.auctions.length) + ")")])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-spacer")
+              _c("v-icon", { attrs: { small: "", color: "warning" } }, [
+                _vm._v(
+                  "\n                mdi-checkbox-blank-circle\n            "
+                )
+              ]),
+              _vm._v("\n            Enchères à venir "),
+              _c("small", [_vm._v("(" + _vm._s(_vm.auctions.length) + ")")])
             ],
             1
           ),
           _vm._v(" "),
-          _c("v-banner", { attrs: { "single-line": "" } }, [
-            _vm._v(
-              "\n            Vous pouvez participer aux prochaines enchères.\n        "
-            )
-          ]),
-          _vm._v(" "),
+          _c("v-spacer")
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-banner", { attrs: { "single-line": "" } }, [
+        _vm._v(
+          "\n        Vous pouvez participer aux prochaines enchères.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "v-card-text",
+        { staticClass: "grey lighten-4" },
+        [
           _c(
-            "v-card-text",
-            { staticClass: "grey lighten-4" },
-            [
-              _c(
-                "v-sheet",
-                { staticClass: "mx-auto" },
-                [
-                  _c(
-                    "v-slide-group",
-                    { staticClass: "pa-4", attrs: { "show-arrows": "" } },
-                    _vm._l(_vm.auctions, function(auction) {
-                      return _c(
-                        "v-slide-item",
-                        { key: auction.id },
-                        [
-                          _c("single-auction-card", {
-                            attrs: { auction: auction }
-                          })
-                        ],
-                        1
-                      )
-                    }),
-                    1
-                  )
-                ],
+            "v-slide-group",
+            { attrs: { "show-arrows": "" } },
+            _vm._l(_vm.auctions, function(auction) {
+              return _c(
+                "v-slide-item",
+                { key: auction.id },
+                [_c("single-auction-card", { attrs: { auction: auction } })],
                 1
               )
-            ],
+            }),
             1
           )
         ],
@@ -21376,6 +21374,8 @@ var render = function() {
     "div",
     { staticClass: "welcome" },
     [
+      _c("main-slider", { staticClass: "mb-4" }),
+      _vm._v(" "),
       _c("upcoming-auctions", { attrs: { auctions: _vm.upcomingAuctions } }),
       _vm._v(" "),
       _c("online-auctions", { attrs: { auctuions: _vm.onlineAuctions } })

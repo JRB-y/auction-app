@@ -1,7 +1,7 @@
 <template>
     <div class="welcome">
         <!-- ==== Main Slider ==== -->
-        <!-- <main-slider></main-slider> -->
+        <main-slider class="mb-4"></main-slider>
 
         <!-- ==== Upcoming Auctions ==== -->
         <upcoming-auctions :auctions="upcomingAuctions"></upcoming-auctions>
