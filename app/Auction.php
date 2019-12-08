@@ -10,6 +10,8 @@ class Auction extends Model
 
     use SoftDeletes;
 
+    protected $with = ['product'];
+
     protected $fillable = [
         'start_date', 'end_date', 'product_id',
         'entry_price', 'is_live', 'room_size'
