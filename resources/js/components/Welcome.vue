@@ -14,8 +14,8 @@
 <script>
 import axios from "axios";
 import MainSlider from "./Template/MainSlider";
-import UpcomingAuctions from "./Auction/UpcomingAuctions";
-import OnlineAuctions from "./Auction/OnlineAuctions";
+import UpcomingAuctions from "./Auction/sliders/UpcomingAuctions";
+import OnlineAuctions from "./Auction/sliders/OnlineAuctions";
 
 export default {
     data() {

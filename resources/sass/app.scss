@@ -6,3 +6,9 @@
 @import "variables";
 
 @import "~vuetify/dist/vuetify.min.css";
+
+
+// v-bottom-navigation without shadow
+.v-bottom-navigation {
+    box-shadow: none !important;
+}

@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import SingleAuctionCard from "./SingleAuctionCard";
+import SingleAuctionCard from "../SingleAuctionCard";
 
 export default {
     props: ["auctions"],

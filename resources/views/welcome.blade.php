@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="fr">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,17 +14,9 @@
     </head>
     <body>
 
-        <v-app id="app">
-            <top-bar-nav></top-bar-nav>
-
-            <v-content class="mb-5">
-                <v-container>
-                    <router-view></router-view>
-                </v-container>
-            </v-content>
-
-            <main-footer></main-footer>
-        </v-app>
+        <div id="app">
+            <app-component></app-component>
+        </div>
 
         <script src="{{asset('js/app.js')}}"></script>
 
