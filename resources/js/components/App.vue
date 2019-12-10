@@ -12,14 +12,14 @@
         </v-content>
 
         <!-- ===== Footer ==== -->
-        <footer-component></footer-component>
+        <!-- <footer-component></footer-component> -->
     </v-app>
 </template>
 <script>
 import TopNavbar from "./Template/TopNavbar.vue";
-import FooterComponent from "./Template/Footer.vue";
+// import FooterComponent from "./Template/Footer.vue";
 
 export default {
-    components: { TopNavbar, FooterComponent }
+    components: { TopNavbar }
 };
 </script>
