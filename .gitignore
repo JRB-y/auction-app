@@ -12,3 +12,5 @@ npm-debug.log
 yarn-error.log
 .vscode
 /public/images
+/public/js
+/public/css
