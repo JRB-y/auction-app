@@ -31,7 +31,7 @@ export default {
     },
     methods: {
         getUpcomingAuctions: function() {
-            axios.get("/api/auction").then(data => {
+            axios.get("/auction").then(data => {
                 this.upcomingAuctions = data.data;
             });
         }

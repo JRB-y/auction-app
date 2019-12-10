@@ -11,12 +11,15 @@
 
             <v-spacer></v-spacer>
 
-            <!-- Se connecter -->
-            <router-link to="/login">
+            <!-- Logged Se connecter -->
+            <router-link to="/login" v-if="!$auth.check()">
                 <v-btn depressed small color="primary" class="ma-2 white--text">
                     Se Connecter
                 </v-btn>
             </router-link>
+
+            <!-- Unlogged Se connecter -->
+            <dropdown-login v-if="$auth.check()"></dropdown-login>
 
             <!-- Categories items -->
             <template v-slot:extension>
@@ -24,9 +27,9 @@
                     <v-tab to="/" ripple class="primary">
                         <v-icon>home</v-icon>
                     </v-tab>
-                    <v-tab class="white--text">HiTech</v-tab>
-                    <v-tab class="white--text">Sport</v-tab>
-                    <v-tab class="white--text">Téléphoens</v-tab>
+                    <v-tab class="white--text" disabled>HiTech</v-tab>
+                    <v-tab class="white--text" disabled>Sport</v-tab>
+                    <v-tab class="white--text" disabled>Téléphoens</v-tab>
                     <v-tabs-slider color="primary"></v-tabs-slider>
                 </v-tabs>
             </template>
@@ -34,5 +37,8 @@
     </nav>
 </template>
 <script>
-export default {};
+import DropdownLogin from "./DropdownLogin";
+export default {
+    components: { DropdownLogin }
+};
 </script>

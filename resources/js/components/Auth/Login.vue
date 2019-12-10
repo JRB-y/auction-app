@@ -7,13 +7,25 @@
                 <router-link to="/register">créer</router-link>
                 un rapiement.
             </v-list-item-subtitle>
-            <v-form>
+            <v-alert
+                color="red lighten-2"
+                v-model="has_error"
+                dismissible
+                border="left"
+                elevation="2"
+                colored-border
+                icon="mdi-alert"
+            >
+                Impossible de se connecter
+            </v-alert>
+            <v-form autocomplete="off" @submit.prevent="login" method="post">
                 <v-text-field
-                    label="Login"
-                    name="login"
+                    label="Email"
+                    name="email"
                     prepend-icon="person"
-                    type="text"
-                    color="pink"
+                    type="email"
+                    color="primary"
+                    v-model="user.email"
                 />
 
                 <v-text-field
@@ -21,10 +33,17 @@
                     label="Password"
                     name="password"
                     prepend-icon="lock"
-                    color=""
+                    color="primary"
                     type="password"
+                    v-model="user.password"
                 />
-                <v-btn dark class="mr-4" color="primary" depressed>
+                <v-btn
+                    type="submit"
+                    dark
+                    class="mr-4"
+                    color="primary"
+                    depressed
+                >
                     submit
                 </v-btn>
             </v-form>
@@ -32,5 +51,39 @@
     </div>
 </template>
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            user: {
+                email: "",
+                password: ""
+            },
+            has_error: false
+        };
+    },
+    mounted() {},
+    methods: {
+        login() {
+            // get the redirect object
+            var redirect = this.$auth.redirect();
+            var app = this;
+            this.$auth.login({
+                params: {
+                    email: app.user.email,
+                    password: app.user.password
+                },
+                success: function() {
+                    // handle redirection
+                    // const redirectTo = redirect ? redirect.form.name : this.$auth.user().role ===
+                    this.$router.push("/");
+                },
+                error: function() {
+                    app.has_error = true;
+                },
+                rememberMe: true,
+                fetchUser: true
+            });
+        }
+    }
+};
 </script>

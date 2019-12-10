@@ -1,0 +1,76 @@
+<template>
+    <v-menu
+        v-model="menu"
+        :close-on-content-click="false"
+        :nudge-width="200"
+        offset-x
+        class="mr-5"
+    >
+        <template v-slot:activator="{ on }">
+            <v-icon v-on="on" large>account_circle</v-icon>
+        </template>
+
+        <v-card>
+            <v-list>
+                <v-list-item>
+                    <v-list-item-avatar>
+                        <img src="" alt="John" />
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                        <v-list-item-title>
+                            {{ $auth.user().name }}
+                        </v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+
+            <v-divider></v-divider>
+
+            <v-list dense nav>
+                <!-- Logged as admin -->
+                <v-list-item link v-if="$auth.check(1)">
+                    <v-list-item-icon>
+                        <v-icon>apps</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <router-link :to="{ name: 'admin-backend' }">
+                            <v-list-item-title>
+                                Backend
+                            </v-list-item-title>
+                        </router-link>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item link v-if="$auth.check(1)">
+                    <v-list-item-icon>
+                        <v-icon>bar_chart</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>States</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <!-- Logout btn -->
+                <v-list-item link>
+                    <v-list-item-icon>
+                        <v-icon>exit_to_app</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title @click.prevent="$auth.logout()"
+                            >Déconnexion</v-list-item-title
+                        >
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+        </v-card>
+    </v-menu>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            menu: ""
+        };
+    }
+};
+</script>

@@ -85,7 +85,7 @@ export default {
     },
     methods: {
         getAuction: function() {
-            axios.get(`/api/auction/${this.$route.params.id}`).then(data => {
+            axios.get(`/auction/${this.$route.params.id}`).then(data => {
                 this.auction = data.data;
             });
         }
