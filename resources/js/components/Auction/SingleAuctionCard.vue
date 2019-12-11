@@ -1,57 +1,46 @@
 <template>
-    <v-card
-        max-width="344"
-        class="mx-auto mr-1 ml-1"
-        outlined
-        @click="auctionClicked(auction.id)"
-    >
-        <!-- Title and start_date -->
-        <v-list-item>
-            <v-list-item-content>
-                <v-list-item-title class="headline text-center">
-                    {{ auction.product.name }}
-                </v-list-item-title>
-                <v-btn small dark text color="pink">
-                    {{ moment(auction.start_date).fromNow() }}
-                </v-btn>
-            </v-list-item-content>
-        </v-list-item>
+  <v-card max-width="300" class outlined @click="auctionClicked(auction.id)">
+    <!-- Title and start_date -->
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title class="headline text-center">{{ auction.product.name }}</v-list-item-title>
+        <v-btn small dark text color="pink">{{ moment(auction.start_date).fromNow() }}</v-btn>
+      </v-list-item-content>
+    </v-list-item>
 
-        <!-- Auction image -->
-        <v-img :src="auction.product.img_path" height="194"></v-img>
+    <!-- Auction image -->
+    <v-img :src="auction.product.img_path" height="194" aspect-ratio="1"></v-img>
 
-        <!-- Auction description -->
-        <v-card-text v-text="auction.product.desc.substring(0, 100)">
-        </v-card-text>
+    <!-- Auction description -->
+    <v-card-text v-text="auction.product.desc.substring(0, 100)"></v-card-text>
 
-        <!-- Details and participer btns -->
-        <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="success accent-4" depressed small>
-                Participer
-            </v-btn>
-            <v-spacer></v-spacer>
-        </v-card-actions>
-    </v-card>
+    <!-- Details and participer btns -->
+    <v-card-actions>
+      <!-- <v-btn depressed small color="warning">5$</v-btn> -->
+      <v-spacer></v-spacer>
+      <v-btn depressed small color="success accent-4">Participer</v-btn>
+      <v-spacer></v-spacer>
+    </v-card-actions>
+  </v-card>
 </template>
 <script>
 var moment = require("moment");
 
 export default {
-    props: ["auction"],
-    data() {
-        return {
-            moment: moment
-        };
-    },
-    methods: {
-        auctionClicked: function(auctionID) {
-            if (auctionID !== undefined)
-                this.$router.push({
-                    name: "auction-details",
-                    params: { id: auctionID }
-                });
-        }
+  props: ["auction"],
+  data() {
+    return {
+      moment: moment
+    };
+  },
+  methods: {
+    auctionClicked: function(auctionID) {
+      if (auctionID !== undefined)
+        this.$router.push({
+          name: "auction-details",
+          params: { id: auctionID }
+        });
     }
+  }
 };
 </script>
