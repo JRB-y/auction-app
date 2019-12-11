@@ -1,13 +1,11 @@
 <template>
-    <admin-backend>
-        Hello From the other side !
-    </admin-backend>
+  <admin-layout>Hello From the other side !</admin-layout>
 </template>
 
 <script>
-import AdminBackend from "./Backend";
+import AdminLayout from "./AdminLayout";
 
 export default {
-    components: { AdminBackend }
+  components: { AdminLayout }
 };
 </script>

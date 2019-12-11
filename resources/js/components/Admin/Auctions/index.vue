@@ -1,13 +1,11 @@
 <template>
-    <admin-backend>
-        I'm the Auction Component !
-    </admin-backend>
+  <admin-layout>I'm the Auction Component !</admin-layout>
 </template>
 
 <script>
-import AdminBackend from "../Backend";
+import AdminLayout from "../AdminLayout";
 
 export default {
-    components: { AdminBackend }
+  components: { AdminLayout }
 };
 </script>

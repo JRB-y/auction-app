@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Images;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 
 class ImageController extends Controller
 {
@@ -11,24 +12,31 @@ class ImageController extends Controller
 
     public $path;
 
-    public function __construct($image)
-    {
-        $this->image = $image;
+    public $image_default = "http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder.png";
 
-        $this->save();
-    }
+    private $image;
 
     /**
      * The save method will store the image in the public folder
      * and after we will have access to the path and name of the image.
      */
-    private function save()
+    public function save($image)
     {
+        $this->image = $image;
+
         $this->getName();
 
         $this->saveInPublicFolder();
 
         $this->getPath();
+    }
+
+    public function deleteOld($image_path)
+    {
+        if (File::exists(public_path($image_path))) {
+
+            File::delete(public_path($image_path));
+        }
     }
 
     /**

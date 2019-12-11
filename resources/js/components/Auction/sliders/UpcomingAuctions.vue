@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import SingleAuctionCard from "../SingleAuctionCard";
+import AuctionCard from "../AuctionCard";
 
 export default {
   props: ["auctions"],
-  components: { SingleAuctionCard },
+  components: { AuctionCard },
   data() {
     return {};
   }

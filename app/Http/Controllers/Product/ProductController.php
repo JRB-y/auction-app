@@ -11,7 +11,6 @@ use App\Http\Controllers\Images\ImageController as Image;
 class ProductController extends Controller
 {
 
-    private $image_default = "http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder.png";
 
     public function index()
     {
@@ -20,13 +19,14 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $image = new Image();
         if ($request->hasFile('image')) {
 
-            $image = new Image($request->image);
+            $image->save($request->image);
 
             request()->request->add(['img_path' => $image->path]);
         } else {
-            request()->request->add(['img_path' => $this->image_default]);
+            request()->request->add(['img_path' => $image->image_default]);
         }
 
         return Product::create($request->all());
@@ -39,12 +39,39 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->name);
-        return Product::find($id)->update($request->all());
+
+        $product = Product::find($id);
+
+        if ($product) {
+
+            $image = new Image();
+            if ($request->hasFile('image')) {
+
+
+                $image->deleteOld($product->img_path);
+
+
+                $image->save($request->image);
+
+                request()->request->add(['img_path' => $image->path]);
+            } else {
+                request()->request->add(['img_path' => $image->image_default]);
+            }
+
+            if ($product->update($request->all())) {
+                return response()->json(['msg' => 'success', 'new_img_path' => $product->img_path], 200);
+            }
+        }
     }
 
     public function destroy($id)
     {
-        return Product::find($id)->delete();
+        $product = Product::find($id);
+        $img_path = $product->img_path;
+        if ($product->delete()) {
+            $image = new Image();
+            $image->deleteOld($img_path);
+            return response()->json(['msg' => 'success'], 200);
+        }
     }
 }
