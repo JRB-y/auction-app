@@ -58366,7 +58366,7 @@ var routes = [// Home route (welcome)
   path: '/',
   name: 'home',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./components/Welcome.vue */ "./resources/js/components/Welcome.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(7), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./components/Welcome.vue */ "./resources/js/components/Welcome.vue"));
   },
   meta: {
     auth: undefined
@@ -58376,7 +58376,7 @@ var routes = [// Home route (welcome)
   path: '/auction/:id',
   name: 'auction-details',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./components/Auction/AuctionDetails.vue */ "./resources/js/components/Auction/AuctionDetails.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(7), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./components/Auction/AuctionDetails.vue */ "./resources/js/components/Auction/AuctionDetails.vue"));
   },
   meta: {
     auth: undefined

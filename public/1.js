@@ -34,17 +34,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -583,8 +572,7 @@ var render = function() {
   return _c(
     "v-card",
     {
-      staticClass: "mx-auto mr-1 ml-1",
-      attrs: { "max-width": "344", outlined: "" },
+      attrs: { "max-width": "300", outlined: "" },
       on: {
         click: function($event) {
           return _vm.auctionClicked(_vm.auction.id)
@@ -599,23 +587,13 @@ var render = function() {
             "v-list-item-content",
             [
               _c("v-list-item-title", { staticClass: "headline text-center" }, [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.auction.product.name) +
-                    "\n            "
-                )
+                _vm._v(_vm._s(_vm.auction.product.name))
               ]),
               _vm._v(" "),
               _c(
                 "v-btn",
                 { attrs: { small: "", dark: "", text: "", color: "pink" } },
-                [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(_vm.moment(_vm.auction.start_date).fromNow()) +
-                      "\n            "
-                  )
-                ]
+                [_vm._v(_vm._s(_vm.moment(_vm.auction.start_date).fromNow()))]
               )
             ],
             1
@@ -625,7 +603,11 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("v-img", {
-        attrs: { src: _vm.auction.product.img_path, height: "194" }
+        attrs: {
+          src: _vm.auction.product.img_path,
+          height: "194",
+          "aspect-ratio": "1"
+        }
       }),
       _vm._v(" "),
       _c("v-card-text", {
@@ -641,8 +623,8 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-btn",
-            { attrs: { color: "success accent-4", depressed: "", small: "" } },
-            [_vm._v("\n            Participer\n        ")]
+            { attrs: { depressed: "", small: "", color: "success accent-4" } },
+            [_vm._v("Participer")]
           ),
           _vm._v(" "),
           _c("v-spacer")
@@ -843,7 +825,7 @@ var render = function() {
         [
           _c(
             "v-slide-group",
-            { attrs: { "show-arrows": "" } },
+            { attrs: { "show-arrows": "", "center-active": "" } },
             _vm._l(_vm.auctions, function(auction) {
               return _c(
                 "v-slide-item",

@@ -10,7 +10,7 @@
     <v-banner single-line>Vous pouvez participer aux prochaines enchères.</v-banner>
 
     <v-card-text class="grey lighten-4">
-      <v-slide-group show-arrows>
+      <v-slide-group show-arrows center-active>
         <v-slide-item v-for="auction in auctions" :key="auction.id">
           <!-- ===== Signle Auction Card ===== -->
 

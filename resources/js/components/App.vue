@@ -11,7 +11,7 @@
             </v-container>
         </v-content>
 
-        <!-- ===== Footer ==== -->
+        <!-- ===== Footer TODO: fix when mobile!  ==== -->
         <!-- <footer-component></footer-component> -->
     </v-app>
 </template>
