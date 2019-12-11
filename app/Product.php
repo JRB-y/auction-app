@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
 
-    use SoftDeletes;
+  use SoftDeletes;
 
-    protected $fillable = ['name', 'desc', 'img_path'];
+  protected $fillable = ['name', 'desc', 'img_path'];
 
-    public function auctions()
-    {
-        return $this->hasMany(Auction::class);
-    }
+  protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
+  public function auctions()
+  {
+    return $this->hasMany(Auction::class);
+  }
 }
