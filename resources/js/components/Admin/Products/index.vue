@@ -96,8 +96,7 @@ export default {
     save: function() {
       // its an edit
       if (this.editedIndex > -1) {
-        let formData = this.setForm(new FormData());
-        formData.append("_method", "PATCH");
+        let formData = this.setForm(new FormData(), "PATCH");
         axios.post(`/product/${this.editedProduct.id}`, formData).then(data => {
           this.editedProduct.img_path = data.data.new_img_path;
           Object.assign(this.products[this.editedIndex], this.editedProduct);
@@ -123,11 +122,11 @@ export default {
     fileChanged: function(file) {
       this.image = file;
     },
-    setForm: function(formData) {
+    setForm: function(formData, method = "POST") {
       formData.append("image", this.image || "");
       formData.append("name", this.editedProduct.name || "");
       formData.append("desc", this.editedProduct.desc || "");
-
+      formData.append("_method", method);
       return formData;
     }
   }

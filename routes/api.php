@@ -16,8 +16,17 @@ use Illuminate\Http\Request;
 
 // product resource routes
 Route::resource('product', 'Product\ProductController');
+
+Route::prefix('auction')->group(function () {
+    Route::get('upcoming', 'Auction\AuctionController@getUpcoming');
+    Route::get('live', 'Auction\AuctionController@getLive');
+    Route::post('mise', 'Auction\AuctionMise@handle');
+});
 // auction resource routes
 Route::resource('auction', 'Auction\AuctionController');
+
+
+Route::post('/auction/goLive', 'Auction\GoLive@handle');
 
 
 /** ==== Authentication endpoints ===== **/

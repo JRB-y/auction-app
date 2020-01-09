@@ -3,19 +3,28 @@
     <!-- ==== Main Slider ==== -->
     <main-slider class="mb-4"></main-slider>
 
-    <!-- ==== Upcoming Auctions ==== -->
-    <upcoming-auctions :auctions="upcomingAuctions"></upcoming-auctions>
-
     <!-- ==== Auction online ==== -->
-    <online-auctions :auctuions="onlineAuctions"></online-auctions>
+    <auction-slider
+      :title="'Enchère en ligne'"
+      :color="'success'"
+      :auctions="onlineAuctions"
+      :description="'Lorem Ipsum '"
+    ></auction-slider>
+
+    <!-- ==== Upcoming Auctions ==== -->
+    <auction-slider
+      :title="'Prochaine Enchère'"
+      :color="'warning'"
+      :auctions="upcomingAuctions"
+      :description="'Lorem Ipsum '"
+    ></auction-slider>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import MainSlider from "./Template/MainSlider";
-import UpcomingAuctions from "./Auction/sliders/UpcomingAuctions";
-import OnlineAuctions from "./Auction/sliders/OnlineAuctions";
+import AuctionSlider from "./Auction/sliders/AuctionSlider";
 
 export default {
   data() {
@@ -25,14 +34,20 @@ export default {
       onlineAuctions: []
     };
   },
-  components: { MainSlider, UpcomingAuctions, OnlineAuctions },
+  components: { MainSlider, AuctionSlider },
   mounted() {
     this.getUpcomingAuctions();
+    this.getOnlineAuctions();
   },
   methods: {
     getUpcomingAuctions: function() {
-      axios.get("/auction").then(data => {
+      axios.get("/auction/upcoming").then(data => {
         this.upcomingAuctions = data.data;
+      });
+    },
+    getOnlineAuctions: function() {
+      axios.get("/auction/live").then(data => {
+        this.onlineAuctions = data.data;
       });
     }
   }
