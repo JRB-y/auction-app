@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="300" class outlined @click="auctionClicked(auction.id)">
+  <v-card max-width="300" class="ma-1" outlined @click="auctionClicked(auction.id)">
     <!-- Title and start_date -->
     <v-list-item>
       <v-list-item-content>
@@ -14,17 +14,17 @@
     </v-list-item>
 
     <!-- Auction image -->
-    <v-img :src="auction.product.img_path" height="194" aspect-ratio="1"></v-img>
+    <v-img :src="auction.product.img_path" aspect-ratio="1"></v-img>
 
     <!-- Auction description -->
     <v-card-text v-text="auction.product.desc.substring(0, 100)"></v-card-text>
 
     <!-- Details and participer btns -->
-    <v-card-actions>
-      <!-- <v-btn depressed small color="warning">5$</v-btn> -->
-      <v-spacer></v-spacer>
-      <!-- <v-btn depressed small color="success accent-4">Participer</v-btn> -->
-    </v-card-actions>
+    <!-- <v-card-actions> -->
+    <!-- <v-btn depressed small color="warning">5$</v-btn> -->
+    <!-- <v-spacer></v-spacer> -->
+    <!-- <v-btn depressed small color="success accent-4">Participer</v-btn> -->
+    <!-- </v-card-actions> -->
   </v-card>
 </template>
 <script>

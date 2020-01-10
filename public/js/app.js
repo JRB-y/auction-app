@@ -3150,6 +3150,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
  // import FooterComponent from "./Template/Footer.vue";
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3277,11 +3280,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     DropdownLogin: _DropdownLogin__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }
+  },
+  data: function data() {
+    return {
+      drawer: false,
+      links: ["Home", "A propos", "Contact"]
+    };
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -22304,7 +22357,13 @@ var render = function() {
         { staticClass: "mb-5" },
         [_c("v-container", [_c("router-view")], 1)],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("v-footer", { attrs: { app: "", dark: "" } }, [
+        _c("span", { staticClass: "white--text" }, [
+          _vm._v("© 2020 < jrb > creation")
+        ])
+      ])
     ],
     1
   )
@@ -22516,7 +22575,7 @@ var render = function() {
       _c(
         "v-app-bar",
         {
-          attrs: { color: "grey darken-4", dark: "", flat: "" },
+          attrs: { color: "grey darken-4", dark: "", flat: "", app: "" },
           scopedSlots: _vm._u([
             {
               key: "extension",
@@ -22557,7 +22616,13 @@ var render = function() {
           ])
         },
         [
-          _c("v-app-bar-nav-icon"),
+          _c("v-app-bar-nav-icon", {
+            on: {
+              click: function($event) {
+                _vm.drawer = !_vm.drawer
+              }
+            }
+          }),
           _vm._v(" "),
           _c("v-toolbar-title", { staticClass: "font-weight-bold" }, [
             _vm._v("AUCTION APP")
@@ -22584,6 +22649,115 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _vm.$auth.check() ? _c("dropdown-login") : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-navigation-drawer",
+        {
+          staticClass: "primary",
+          attrs: { app: "", dark: "" },
+          model: {
+            value: _vm.drawer,
+            callback: function($$v) {
+              _vm.drawer = $$v
+            },
+            expression: "drawer"
+          }
+        },
+        [
+          _c(
+            "v-list-item",
+            [
+              _c(
+                "v-list-item-content",
+                [
+                  _c("v-list-item-title", { staticClass: "title" }, [
+                    _vm._v("Application")
+                  ]),
+                  _vm._v(" "),
+                  _c("v-list-item-subtitle", [_vm._v("Menu")])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-divider"),
+          _vm._v(" "),
+          _c(
+            "v-list",
+            { attrs: { dense: "", nav: "", dark: "" } },
+            [
+              _c(
+                "v-list-item",
+                { attrs: { link: "" } },
+                [
+                  _c("v-list-item-icon", [_c("v-icon", [_vm._v("home")])], 1),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [
+                      _c("v-list-item-title", { staticClass: "white--text" }, [
+                        _vm._v("Home")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
+                { attrs: { link: "" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    [_c("v-icon", [_vm._v("account_box")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [
+                      _c("v-list-item-title", { staticClass: "white--text" }, [
+                        _vm._v("A propos")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
+                { attrs: { link: "" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    [_c("v-icon", [_vm._v("contactless")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [
+                      _c("v-list-item-title", { staticClass: "white--text" }, [
+                        _vm._v("Contact")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
         ],
         1
       )
@@ -76792,7 +76966,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
     themes: {
       light: {
         dark: '#212121',
-        primary: '#0073a0'
+        primary: '#3f51b5'
       }
     }
   },

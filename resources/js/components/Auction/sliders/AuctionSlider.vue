@@ -10,16 +10,14 @@
     </v-toolbar>
     <!-- <v-banner single-line>{{ description }}.</v-banner> -->
 
-    <v-card-text class="grey lighten-4">
-      <v-slide-group show-arrows center-active>
-        <v-slide-item v-for="auction in auctions" :key="auction.id">
-          <!-- ===== Signle Auction Card ===== -->
-          <auction-card :auction="auction"></auction-card>
+    <v-slide-group show-arrows center-active>
+      <v-slide-item v-for="auction in auctions" :key="auction.id">
+        <!-- ===== Signle Auction Card ===== -->
+        <auction-card :auction="auction"></auction-card>
 
-          <!-- ===== End Signle Auction Card ===== -->
-        </v-slide-item>
-      </v-slide-group>
-    </v-card-text>
+        <!-- ===== End Signle Auction Card ===== -->
+      </v-slide-item>
+    </v-slide-group>
   </v-card>
 </template>
 

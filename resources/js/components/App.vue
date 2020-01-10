@@ -13,6 +13,9 @@
 
     <!-- ===== Footer TODO: fix when mobile!  ==== -->
     <!-- <footer-component></footer-component> -->
+    <v-footer app dark>
+      <span class="white--text">&copy; 2020 < jrb > creation</span>
+    </v-footer>
   </v-app>
 </template>
 <script>

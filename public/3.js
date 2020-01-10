@@ -102,8 +102,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["auctions", "title", "color", "description"],
@@ -126,11 +124,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -533,6 +526,7 @@ var render = function() {
   return _c(
     "v-card",
     {
+      staticClass: "ma-1",
       attrs: { "max-width": "300", outlined: "" },
       on: {
         click: function($event) {
@@ -576,20 +570,14 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("v-img", {
-        attrs: {
-          src: _vm.auction.product.img_path,
-          height: "194",
-          "aspect-ratio": "1"
-        }
+        attrs: { src: _vm.auction.product.img_path, "aspect-ratio": "1" }
       }),
       _vm._v(" "),
       _c("v-card-text", {
         domProps: {
           textContent: _vm._s(_vm.auction.product.desc.substring(0, 100))
         }
-      }),
-      _vm._v(" "),
-      _c("v-card-actions", [_c("v-spacer")], 1)
+      })
     ],
     1
   )
@@ -643,23 +631,16 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "v-card-text",
-        { staticClass: "grey lighten-4" },
-        [
-          _c(
-            "v-slide-group",
-            { attrs: { "show-arrows": "", "center-active": "" } },
-            _vm._l(_vm.auctions, function(auction) {
-              return _c(
-                "v-slide-item",
-                { key: auction.id },
-                [_c("auction-card", { attrs: { auction: auction } })],
-                1
-              )
-            }),
+        "v-slide-group",
+        { attrs: { "show-arrows": "", "center-active": "" } },
+        _vm._l(_vm.auctions, function(auction) {
+          return _c(
+            "v-slide-item",
+            { key: auction.id },
+            [_c("auction-card", { attrs: { auction: auction } })],
             1
           )
-        ],
+        }),
         1
       )
     ],

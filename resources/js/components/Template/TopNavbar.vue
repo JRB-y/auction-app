@@ -1,8 +1,9 @@
 <template>
   <nav>
-    <v-app-bar color="grey darken-4" dark flat>
+    <v-app-bar color="grey darken-4" dark flat app>
       <!-- Toggle drawer (menu) -->
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <!-- <v-toolbar-side-icon class="gray"></v-toolbar-side-icon> -->
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <!-- Application title / logo -->
       <v-toolbar-title class="font-weight-bold">AUCTION APP</v-toolbar-title>
@@ -29,11 +30,60 @@
         </v-tabs>
       </template>
     </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" app dark class="primary">
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title">Application</v-list-item-title>
+          <v-list-item-subtitle>Menu</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list dense nav dark>
+        <v-list-item link>
+          <v-list-item-icon>
+            <v-icon>home</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title class="white--text">Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link>
+          <v-list-item-icon>
+            <v-icon>account_box</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="white--text">A propos</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link>
+          <v-list-item-icon>
+            <v-icon>contactless</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="white--text">Contact</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </nav>
 </template>
 <script>
 import DropdownLogin from "./DropdownLogin";
 export default {
-  components: { DropdownLogin }
+  components: { DropdownLogin },
+  data() {
+    return {
+      drawer: false,
+      links: ["Home", "A propos", "Contact"]
+    };
+  },
+  methods: {}
 };
 </script>
