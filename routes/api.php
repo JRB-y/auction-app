@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,23 +12,35 @@ use Illuminate\Http\Request;
 |
 */
 
-
-// product resource routes
+/**
+ * Product API routes
+ */
 Route::resource('product', 'Product\ProductController');
 
+/**
+ * Auction API routes
+ */
 Route::prefix('auction')->group(function () {
     Route::get('upcoming', 'Auction\AuctionController@getUpcoming');
     Route::get('live', 'Auction\AuctionController@getLive');
     Route::post('mise', 'Auction\AuctionMise@handle');
+    // get my current validate auctions
+    Route::get('my-current', 'Auction\MyCurrentAuctions@get');
 });
 // auction resource routes
 Route::resource('auction', 'Auction\AuctionController');
-
-
 Route::post('/auction/goLive', 'Auction\GoLive@handle');
 
 
-/** ==== Authentication endpoints ===== **/
+
+/**
+ *  Participations API route
+ */
+Route::post('/participer', 'Participation\ParticipationController@participer');
+
+/**
+ * Authentication API endpoints 
+ */
 Route::prefix('auth')->group(function () {
     // register
     Route::post('register', 'AuthController@register');
@@ -45,6 +56,3 @@ Route::prefix('auth')->group(function () {
         Route::post('logout', 'AuthController@logout');
     });
 });
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });

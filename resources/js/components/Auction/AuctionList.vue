@@ -6,6 +6,11 @@
     <!-- End Date -->
     <template v-slot:item.end_date="{ item }">{{ moment(item.end_date).format('DD/MM/YYYY') }}</template>
 
+    <!-- Room Size / Participant -->
+    <template
+      v-slot:item.room_size="{ item }"
+    >{{ item.participations.length }} / {{ item.room_size }}</template>
+
     <template v-slot:item.is_live="{ item }">
       <v-icon @click="goLive(item)" color="success" v-if="item.is_live">check_circle</v-icon>
       <v-icon @click="goLive(item)" v-else>check_circle</v-icon>
@@ -38,7 +43,7 @@ export default {
         { text: "Heure Fin", value: "end_time", sortable: true },
         { text: "Prix", value: "price", sortable: true },
         { text: "Entrée", value: "entry_price", sortable: true },
-        { text: "Joueurs", value: "room_size", sortable: true },
+        { text: "Participants", value: "room_size", sortable: true },
         { text: "Création", value: "created_at", sortable: true },
         { text: "Live", value: "is_live", sortable: false },
         { text: "action", value: "action", sortable: false }

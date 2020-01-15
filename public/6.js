@@ -50,17 +50,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -130,12 +119,12 @@ var render = function() {
             "v-list-item-subtitle",
             [
               _vm._v(
-                "\n            Si vous n'avez pas de compte vous pouvez\n            "
+                "\n      Si vous n'avez pas de compte vous pouvez\n      "
               ),
               _c("router-link", { attrs: { to: "/register" } }, [
                 _vm._v("créer")
               ]),
-              _vm._v("\n            un rapiement.\n        ")
+              _vm._v("un rapiement.\n    ")
             ],
             1
           ),
@@ -159,7 +148,7 @@ var render = function() {
                 expression: "has_error"
               }
             },
-            [_vm._v("\n            Impossible de se connecter\n        ")]
+            [_vm._v("Impossible de se connecter")]
           ),
           _vm._v(" "),
           _c(
@@ -217,10 +206,12 @@ var render = function() {
                     type: "submit",
                     dark: "",
                     color: "primary",
-                    depressed: ""
+                    depressed: "",
+                    small: "",
+                    block: ""
                   }
                 },
-                [_vm._v("\n                submit\n            ")]
+                [_vm._v("Connexion")]
               )
             ],
             1

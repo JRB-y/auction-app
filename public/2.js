@@ -476,6 +476,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -518,7 +523,7 @@ __webpack_require__.r(__webpack_exports__);
         value: "entry_price",
         sortable: true
       }, {
-        text: "Joueurs",
+        text: "Participants",
         value: "room_size",
         sortable: true
       }, {
@@ -1518,6 +1523,19 @@ var render = function() {
           var item = ref.item
           return [
             _vm._v(_vm._s(_vm.moment(item.end_date).format("DD/MM/YYYY")))
+          ]
+        }
+      },
+      {
+        key: "item.room_size",
+        fn: function(ref) {
+          var item = ref.item
+          return [
+            _vm._v(
+              _vm._s(item.participations.length) +
+                " / " +
+                _vm._s(item.room_size)
+            )
           ]
         }
       },

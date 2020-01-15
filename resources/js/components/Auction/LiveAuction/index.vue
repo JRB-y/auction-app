@@ -19,8 +19,8 @@
       <v-col>
         <v-img
           :aspect-ratio="1"
-          max-width="500"
-          max-height="300"
+          max-width="375"
+          max-height="376"
           :src="auction.product.img_path"
           class="grey lighten-2 mx-auto mt-5"
         ></v-img>

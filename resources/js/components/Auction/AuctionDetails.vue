@@ -1,6 +1,10 @@
 <template>
   <div>
-    <unlive-auction v-if="auction && !auction.is_live" :auction="auction"></unlive-auction>
+    <unlive-auction
+      v-if="auction && !auction.is_live"
+      :auction="auction"
+      @userParticipated="userParticipatedEvent"
+    ></unlive-auction>
 
     <live-auction v-if="auction && auction.is_live" :auction="auction" @newMise="newMise"></live-auction>
   </div>
@@ -30,6 +34,9 @@ export default {
     newMise: function(bet) {
       console.log(bet);
       this.auction.bets.push(bet);
+    },
+    userParticipatedEvent() {
+      this.getAuction();
     }
   }
 };

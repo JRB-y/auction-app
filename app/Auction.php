@@ -11,7 +11,7 @@ class Auction extends Model
 
     use SoftDeletes;
 
-    protected $with = ['product', 'bets'];
+    protected $with = ['product', 'bets', 'participations'];
 
     protected $fillable = [
         'start_date', 'end_date', 'product_id', 'start_time', 'end_time',
@@ -38,5 +38,10 @@ class Auction extends Model
     public function bets()
     {
         return $this->hasMany(Bet::class);
+    }
+
+    public function participations()
+    {
+        return $this->hasMany(Participation::class);
     }
 }

@@ -22361,7 +22361,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-footer", { attrs: { app: "", dark: "" } }, [
         _c("span", { staticClass: "white--text" }, [
-          _vm._v("© 2020 < jrb > creation")
+          _vm._v("© 2020 - by < jrb />")
         ])
       ])
     ],
@@ -76990,7 +76990,7 @@ __webpack_require__.r(__webpack_exports__);
   path: '/auction/:id',
   name: 'auction-details',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ../components/Auction/AuctionDetails.vue */ "./resources/js/components/Auction/AuctionDetails.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../components/Auction/AuctionDetails.vue */ "./resources/js/components/Auction/AuctionDetails.vue"));
   },
   meta: {
     auth: undefined
@@ -77013,6 +77013,15 @@ __webpack_require__.r(__webpack_exports__);
   name: 'login',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/Auth/Login.vue */ "./resources/js/components/Auth/Login.vue"));
+  },
+  meta: {
+    auth: false
+  }
+}, {
+  path: '/register',
+  name: 'register',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/Auth/Register.vue */ "./resources/js/components/Auth/Register.vue"));
   },
   meta: {
     auth: false
@@ -77095,7 +77104,7 @@ __webpack_require__.r(__webpack_exports__);
   path: '/',
   name: 'home',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../components/Welcome */ "./resources/js/components/Welcome.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ../components/Welcome */ "./resources/js/components/Welcome.vue"));
   },
   meta: {
     auth: undefined

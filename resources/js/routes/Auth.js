@@ -6,5 +6,13 @@ export default [
     meta: {
       auth: false
     }
-  }
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('../components/Auth/Register.vue'),
+    meta: {
+      auth: false
+    }
+  },
 ]
