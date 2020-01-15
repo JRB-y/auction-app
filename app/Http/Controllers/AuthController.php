@@ -89,6 +89,9 @@ class AuthController extends Controller
      */
     public function refresh()
     {
+
+        $this->middleware('auth:api', ['except' => ['login', 'refresh']]);
+
         if ($token = $this->guard()->refresh()) {
             return response()
                 ->json(['status' => 'successs'], 200)
