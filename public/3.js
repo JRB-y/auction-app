@@ -9,10 +9,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _UnliveAuction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UnliveAuction */ "./resources/js/components/Auction/UnliveAuction/index.vue");
-/* harmony import */ var _LiveAuction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LiveAuction */ "./resources/js/components/Auction/LiveAuction/index.vue");
+/* harmony import */ var _UnliveAuction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UnliveAuction */ "./resources/js/components/Auction/UnliveAuction/index.vue");
+/* harmony import */ var _LiveAuction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LiveAuction */ "./resources/js/components/Auction/LiveAuction/index.vue");
 //
 //
 //
@@ -28,25 +26,24 @@ __webpack_require__.r(__webpack_exports__);
 /** ===== import axios to get the current Auction from props id ===== **/
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    UnliveAuction: _UnliveAuction__WEBPACK_IMPORTED_MODULE_1__["default"],
-    LiveAuction: _LiveAuction__WEBPACK_IMPORTED_MODULE_2__["default"]
+    UnliveAuction: _UnliveAuction__WEBPACK_IMPORTED_MODULE_0__["default"],
+    LiveAuction: _LiveAuction__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
       auction: null
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     this.getAuction();
   },
   methods: {
     getAuction: function getAuction() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/auction/".concat(this.$route.params.id)).then(function (data) {
+      axios.get("/auction/".concat(this.$route.params.id)).then(function (data) {
         _this.auction = data.data;
       });
     },
@@ -55,6 +52,8 @@ __webpack_require__.r(__webpack_exports__);
       this.auction.bets.push(bet);
     },
     userParticipatedEvent: function userParticipatedEvent() {
+      // After the user click on 'confirme participation' we need to refresh the
+      // auction model just by calling getAuction.
       this.getAuction();
     }
   }
@@ -215,6 +214,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -229,16 +229,28 @@ __webpack_require__.r(__webpack_exports__);
       moment: moment__WEBPACK_IMPORTED_MODULE_2___default.a,
       dialogMise: false,
       mises: [1, 5, 10, 50],
-      miseSelected: null
+      miseSelected: null,
+      // message for the chat
+      message: ""
     };
+  },
+  computed: {
+    bets: function bets() {
+      var bets = [];
+      bets.push(this.auction.bets[this.auction.bets.length - 1]);
+      bets.push(this.auction.bets[this.auction.bets.length - 2]);
+      bets.push(this.auction.bets[this.auction.bets.length - 3]);
+      return bets;
+    }
   },
   methods: {
     miser: function miser() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/auction/mise", {
-        id: this.auction.id,
-        price: this.miseSelected
+      this.$store.dispatch("miser", {
+        auction_id: this.auction.id,
+        price: this.miseSelected,
+        user_id: this.$store.getters.currentUser.id
       }).then(function (data) {
         _this.$emit("newMise", data.data.bet);
 
@@ -262,8 +274,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -345,13 +355,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UnliveAuction",
   props: ["auction"],
-  created: function created() {//
-  },
   data: function data() {
     return {
       moment: moment__WEBPACK_IMPORTED_MODULE_0___default.a,
@@ -359,18 +397,23 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    currentUser: function currentUser() {
+      return this.$store.getters.currentUser;
+    },
     userParticipated: function userParticipated() {
-      var _this = this;
+      if (!this.$store.getters.loggedIn) {
+        return undefined;
+      }
 
       var participations = this.auction.participations;
-      var user_id = this.$auth.user().id;
+      var user_id = this.currentUser.id;
       var participation = false;
 
       if (participations.length === 0) {
         return false;
       } else {
         participations.forEach(function (element) {
-          if (element.user_id == _this.$auth.user().id) {
+          if (element.user_id == user_id) {
             participation = true;
           } else participation = false;
         });
@@ -380,19 +423,21 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    participer: function participer() {
-      return null;
-    },
     confirmerParticipation: function confirmerParticipation() {
-      var _this2 = this;
+      var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/participer", {
-        auction_id: this.auction.id
+      this.$store.dispatch("participer", {
+        auction_id: this.auction.id,
+        user_id: this.$store.getters.currentUser.id
       }).then(function (data) {
-        console.log(data);
-        _this2.dialogParticiper = false;
+        _this.dialogParticiper = false;
 
-        _this2.$emit("userParticipated");
+        _this.$emit("userParticipated");
+      });
+    },
+    goToLoginPage: function goToLoginPage() {
+      this.$router.push({
+        name: "login"
       });
     }
   }
@@ -751,7 +796,9 @@ var render = function() {
       attrs: { "two-line": "" }
     },
     [
-      _c("h4", { staticClass: "title" }, [_vm._v("Historique des enchères")]),
+      _c("h4", { staticClass: "title grey--text text--darken-3" }, [
+        _vm._v("Dernières mises")
+      ]),
       _vm._v(" "),
       _c(
         "v-list-item-group",
@@ -761,6 +808,7 @@ var render = function() {
             return [
               _c("v-list-item", {
                 key: item.title,
+                class: { succes: index === 0, "theme-light": index === 0 },
                 scopedSlots: _vm._u(
                   [
                     {
@@ -880,23 +928,11 @@ var render = function() {
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { color: "primary", depressed: "", small: "" } },
-            [
-              _c("span", [
-                _vm._v(
-                  "Fin " +
-                    _vm._s(
-                      _vm
-                        .moment(_vm.auction.end_date)
-                        .locale("fr")
-                        .fromNow()
-                    )
-                )
-              ])
-            ]
-          )
+          _c("span", { staticClass: "subtitle-2 success--text" }, [
+            _vm._v("\n      PRIX:\n      "),
+            _c("b", [_vm._v("100")]),
+            _vm._v(" CFA\n    ")
+          ])
         ],
         1
       ),
@@ -910,27 +946,41 @@ var render = function() {
             [
               _c("v-img", {
                 staticClass: "grey lighten-2 mx-auto mt-5",
-                attrs: {
-                  "aspect-ratio": 1,
-                  "max-width": "375",
-                  "max-height": "376",
-                  src: _vm.auction.product.img_path
-                }
-              })
+                attrs: { "aspect-ratio": 1, src: _vm.auction.product.img_path }
+              }),
+              _vm._v(" "),
+              _c(
+                "span",
+                { staticClass: "grey--text text--darken-1 caption ml-5" },
+                [
+                  _vm._v(
+                    "Fin " +
+                      _vm._s(
+                        _vm
+                          .moment(_vm.auction.end_date)
+                          .locale("fr")
+                          .fromNow()
+                      )
+                  )
+                ]
+              )
             ],
             1
           ),
           _vm._v(" "),
-          _c(
-            "v-col",
-            [_c("bet-history", { attrs: { bets: _vm.auction.bets } })],
-            1
-          )
+          _c("v-col", [_c("bet-history", { attrs: { bets: _vm.bets } })], 1)
         ],
         1
       ),
       _vm._v(" "),
-      _c("v-card-text", [_vm._v(_vm._s(_vm.auction.product.desc))]),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "div",
+        { attrs: { id: "chat-box" } },
+        [_c("v-card-text", [_vm._v(_vm._s(_vm.auction.product.desc))])],
+        1
+      ),
       _vm._v(" "),
       _c("v-spacer"),
       _vm._v(" "),
@@ -938,37 +988,39 @@ var render = function() {
         "v-toolbar",
         { attrs: { flat: "" } },
         [
-          _c(
-            "v-btn",
-            { attrs: { text: "", icon: "" } },
-            [_c("v-icon", [_vm._v("exit_to_app")])],
-            1
-          ),
+          _c("br"),
           _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            {
-              attrs: { depressed: "", small: "", color: "success" },
-              on: {
-                click: function($event) {
-                  _vm.dialogMise = true
-                }
-              }
-            },
-            [_c("span", [_vm._v("Mise")])]
-          ),
-          _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { depressed: "", small: "", color: "primary" } },
-            [_c("span", [_vm._v("Prix Total: 10")])]
-          )
+          _c("v-text-field", {
+            attrs: { label: "Votre message" },
+            model: {
+              value: _vm.message,
+              callback: function($$v) {
+                _vm.message = $$v
+              },
+              expression: "message"
+            }
+          })
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        {
+          attrs: {
+            depressed: "",
+            small: "",
+            color: "success",
+            block: "",
+            tile: ""
+          },
+          on: {
+            click: function($event) {
+              _vm.dialogMise = true
+            }
+          }
+        },
+        [_c("span", [_vm._v("Jouer")])]
       ),
       _vm._v(" "),
       _c(
@@ -1117,7 +1169,7 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          !_vm.userParticipated
+          this.$store.getters.loggedIn && !_vm.userParticipated
             ? _c(
                 "v-btn",
                 {
@@ -1134,6 +1186,45 @@ var render = function() {
                     "Participer (" + _vm._s(_vm.auction.entry_price) + " CFA)"
                   )
                 ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userParticipated
+            ? _c(
+                "v-btn",
+                {
+                  staticClass: "mt-1",
+                  attrs: { color: "warning", block: "", disabled: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.dialogParticiper = !_vm.dialogParticiper
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "Vous participez déjà (" +
+                      _vm._s(_vm.auction.entry_price) +
+                      " CFA)"
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          !this.$store.getters.loggedIn
+            ? _c(
+                "v-btn",
+                {
+                  staticClass: "mt-1",
+                  attrs: {
+                    color: "primary",
+                    block: "",
+                    tile: "",
+                    depressed: ""
+                  },
+                  on: { click: _vm.goToLoginPage }
+                },
+                [_vm._v("Connection")]
               )
             : _vm._e(),
           _vm._v(" "),
@@ -1256,7 +1347,7 @@ var render = function() {
                       attrs: {
                         block: "",
                         color: "primary accent-4",
-                        disabled: !_vm.$auth.check()
+                        disabled: _vm.userParticipated
                       },
                       on: { click: _vm.confirmerParticipation }
                     },

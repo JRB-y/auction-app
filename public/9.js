@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auction/AuctionCard.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************!*\
@@ -166,28 +166,45 @@ __webpack_require__.r(__webpack_exports__);
     AuctionSlider: _Auction_sliders_AuctionSlider__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   created: function created() {
-    this.$store.dispatch("onlineAuctions");
     this.$store.dispatch("upcomingAuctions");
+    this.$store.dispatch("onlineAuctions");
   },
   computed: {
-    onlineAuctions: {
-      get: function get() {
-        return this.$store.getters.onlineAuctions;
-      },
-      set: function set(val) {
-        this.value = val;
-      }
+    upcomingAuctions: function upcomingAuctions() {
+      return this.$store.getters.upcomingAuctions;
     },
-    upcomingAuctions: {
-      get: function get() {
-        return this.$store.getters.upcomingAuctions;
-      },
-      set: function set(val) {
-        this.value = val;
-      }
+    onlineAuctions: function onlineAuctions() {
+      return this.$store.getters.onlineAuctions;
     }
   },
-  methods: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["upcomingAuctions", "onlineAuctions"])
+  // computed: mapGetters({
+  //   upcomingAuctions: "upcomingAuctions",
+  //   onlineAuctions: "onlineAuctions"
+  // }),
+  methods: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["upcomingAuctions", "onlineAuctions"]) // MainSlider
+  // mounted() {
+  //   this.getupcomingAuctions();
+  //   this.getOnlineAuctions();
+  //   // check user if online to get his current auctions
+  //   this.$auth.check() ? this.getMyCurrentAuctions() : "";
+  // }
+  // methods: {
+  //   getupcomingAuctions: function() {
+  //     // axios.get("/auction/upcoming").then(data => {
+  //     //   this.upcomingAuctions = data.data;
+  //     // });
+  //     this.$store.dispatch("upcommingAuctions");
+  //   },
+  //   getOnlineAuctions: function() {
+  //     this.$store.dispatch("onlineAuctions");
+  //   },
+  //   getMyCurrentAuctions: function() {
+  //     axios.get("/auction/my-current").then(data => {
+  //       this.myCurrentAuctions = data.data;
+  //     });
+  //   }
+  // }
+
 });
 
 /***/ }),
