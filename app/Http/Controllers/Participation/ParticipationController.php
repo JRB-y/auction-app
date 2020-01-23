@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Participation;
 
-use App\Http\Controllers\Controller;
 use App\Participation;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ParticipationController extends Controller
 {
@@ -17,9 +18,9 @@ class ParticipationController extends Controller
      */
     public function participer(Request $request)
     {
+        // in the request we receive the { auction_id, user_id }
         // we get the user from the request() function
-        $user_id = $request->user()->id;
-
+        $user_id = $request->user_id;
         // we get the auction id from the request
         $auction_id = $request->auction_id;
 

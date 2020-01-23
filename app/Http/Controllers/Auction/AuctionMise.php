@@ -12,10 +12,15 @@ class AuctionMise extends Controller
 {
     public function handle(Request $request)
     {
+        // get the user
+        $user_id = $request->user_id;
+        $auction_id = $request->auction_id;
+        $price = intval($request->price);
+
         $bet = Bet::create([
-            'user_id' => $request->user()->id,
-            'auction_id' => $request->id,
-            'price' => $request->price
+            'user_id' => $user_id,
+            'auction_id' => $auction_id,
+            'price' => $price
         ]);
 
         $bet = Bet::find($bet->id);

@@ -9,14 +9,47 @@
 
         <v-spacer></v-spacer>
       </v-toolbar>
+      <!--  -->
+      <!--  -->
+      <!--  -->
+      <!-- Bouton participer  -->
+      <!-- il faut que l'utilisateur il soit connecter pour le voir et n'est pas inscrit -->
       <v-btn
         color="primary"
         class="mt-1"
         block
         tile
         @click="dialogParticiper = !dialogParticiper"
-        v-if="!userParticipated"
+        v-if="this.$store.getters.loggedIn && !userParticipated"
       >Participer ({{ auction.entry_price }} CFA)</v-btn>
+      <!--  -->
+      <!--  -->
+      <!--  -->
+      <!-- Bouton vous avez deja participer (il faut que l'utilisateur est connecter et inscript ) -->
+      <v-btn
+        color="warning"
+        class="mt-1"
+        block
+        @click="dialogParticiper = !dialogParticiper"
+        disabled
+        v-if="userParticipated"
+      >Vous participez déjà ({{ auction.entry_price }} CFA)</v-btn>
+      <!--  -->
+      <!--  -->
+      <!--  -->
+      <!-- Bouton Connexion (quand le user n'est pas connecter ) -->
+      <v-btn
+        color="primary"
+        class="mt-1"
+        block
+        tile
+        depressed
+        @click="goToLoginPage"
+        v-if="!this.$store.getters.loggedIn"
+      >Connection</v-btn>
+      <!--  -->
+      <!--  -->
+      <!--  -->
       <v-btn
         depressed
         small
@@ -46,8 +79,6 @@
 
       <v-spacer></v-spacer>
       <v-card-text>{{ auction.product.desc }}</v-card-text>
-
-      <!-- btn participer -->
     </v-card>
     <!-- Diablog participer -->
     <v-dialog v-model="dialogParticiper" width="500">
@@ -72,7 +103,7 @@
             class="white--text"
             color="primary accent-4"
             @click="confirmerParticipation"
-            :disabled="!$auth.check()"
+            :disabled="userParticipated"
           >Confirmer ({{ auction.entry_price }} CFA)</v-btn>
         </v-card-actions>
       </v-card>
@@ -81,14 +112,10 @@
 </template>
 <script>
 import moment from "moment";
-import axios from "axios";
 
 export default {
   name: "UnliveAuction",
   props: ["auction"],
-  created() {
-    //
-  },
   data() {
     return {
       moment: moment,
@@ -96,16 +123,24 @@ export default {
     };
   },
   computed: {
+    currentUser() {
+      return this.$store.getters.currentUser;
+    },
     userParticipated() {
+      if (!this.$store.getters.loggedIn) {
+        return undefined;
+      }
       let participations = this.auction.participations;
-      let user_id = this.$auth.user().id;
+
+      let user_id = this.currentUser.id;
+
       let participation = false;
 
       if (participations.length === 0) {
         return false;
       } else {
         participations.forEach(element => {
-          if (element.user_id == this.$auth.user().id) {
+          if (element.user_id == user_id) {
             participation = true;
           } else participation = false;
         });
@@ -114,15 +149,19 @@ export default {
     }
   },
   methods: {
-    participer() {
-      return null;
-    },
     confirmerParticipation() {
-      axios.post("/participer", { auction_id: this.auction.id }).then(data => {
-        console.log(data);
-        this.dialogParticiper = false;
-        this.$emit("userParticipated");
-      });
+      this.$store
+        .dispatch("participer", {
+          auction_id: this.auction.id,
+          user_id: this.$store.getters.currentUser.id
+        })
+        .then(data => {
+          this.dialogParticiper = false;
+          this.$emit("userParticipated");
+        });
+    },
+    goToLoginPage() {
+      this.$router.push({ name: "login" });
     }
   }
 };

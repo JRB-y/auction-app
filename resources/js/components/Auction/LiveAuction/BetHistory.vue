@@ -1,9 +1,9 @@
 <template>
   <v-list two-line class="overflow-y-auto" style="max-height: 400px">
-    <h4 class="title">Historique des enchères</h4>
+    <h4 class="title grey--text text--darken-3">Dernières mises</h4>
     <v-list-item-group active-class="primary--text">
       <template v-for="(item, index) in bets">
-        <v-list-item :key="item.title">
+        <v-list-item :key="item.title" :class="{succes: index === 0, 'theme-light' : index === 0}">
           <template v-slot:default="{ active, toggle }">
             <v-list-item-content>
               <v-list-item-title v-text="item.user.name"></v-list-item-title>

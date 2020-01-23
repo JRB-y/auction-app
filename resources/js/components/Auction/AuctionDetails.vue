@@ -11,7 +11,6 @@
 </template>
 <script>
 /** ===== import axios to get the current Auction from props id ===== **/
-import axios from "axios";
 import UnliveAuction from "./UnliveAuction";
 import LiveAuction from "./LiveAuction";
 
@@ -22,7 +21,7 @@ export default {
       auction: null
     };
   },
-  mounted() {
+  created() {
     this.getAuction();
   },
   methods: {
@@ -36,6 +35,8 @@ export default {
       this.auction.bets.push(bet);
     },
     userParticipatedEvent() {
+      // After the user click on 'confirme participation' we need to refresh the
+      // auction model just by calling getAuction.
       this.getAuction();
     }
   }
