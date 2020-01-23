@@ -4,13 +4,13 @@
     <!-- <main-slider class="mb-4"></main-slider> -->
 
     <!-- ==== My Participated Auctions  ==== -->
-    <auction-slider
+    <!-- v-if="$auth.check()" -->
+    <!-- <auction-slider
       :title="'Mes Enchères'"
       :color="'primary'"
       :auctions="myCurrentAuctions"
       :description="'Lorem Ipsum'"
-      v-if="$auth.check()"
-    ></auction-slider>
+    ></auction-slider>-->
 
     <!-- ==== Auction online ==== -->
     <auction-slider
@@ -31,43 +31,34 @@
 </template>
 
 <script>
-import axios from "axios";
-// import MainSlider from "./Template/MainSlider";
 import AuctionSlider from "./Auction/sliders/AuctionSlider";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  data() {
-    return {
-      auctions: [],
-      upcomingAuctions: [],
-      onlineAuctions: [],
-      myCurrentAuctions: []
-    };
-  },
-  // MainSlider
+  name: "Welcome",
   components: { AuctionSlider },
-  mounted() {
-    this.getUpcomingAuctions();
-    this.getOnlineAuctions();
-    // check user if online to get his current auctions
-    this.$auth.check() ? this.getMyCurrentAuctions() : "";
+  created() {
+    this.$store.dispatch("onlineAuctions");
+    this.$store.dispatch("upcomingAuctions");
   },
-  methods: {
-    getUpcomingAuctions: function() {
-      axios.get("/auction/upcoming").then(data => {
-        this.upcomingAuctions = data.data;
-      });
+  computed: {
+    onlineAuctions: {
+      get() {
+        return this.$store.getters.onlineAuctions;
+      },
+      set(val) {
+        this.value = val;
+      }
     },
-    getOnlineAuctions: function() {
-      axios.get("/auction/live").then(data => {
-        this.onlineAuctions = data.data;
-      });
-    },
-    getMyCurrentAuctions: function() {
-      axios.get("/auction/my-current").then(data => {
-        this.myCurrentAuctions = data.data;
-      });
+    upcomingAuctions: {
+      get() {
+        return this.$store.getters.upcomingAuctions;
+      },
+      set(val) {
+        this.value = val;
+      }
     }
-  }
+  },
+  methods: mapActions(["upcomingAuctions", "onlineAuctions"])
 };
 </script>

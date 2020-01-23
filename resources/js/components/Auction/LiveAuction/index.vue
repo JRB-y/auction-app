@@ -9,47 +9,48 @@
       <v-toolbar-title>{{auction.product.name}}</v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <v-btn color="primary" depressed small>
-        <span>Fin {{ moment(auction.end_date).locale('fr').fromNow() }}</span>
-      </v-btn>
+      <span class="subtitle-2 success--text">
+        PRIX:
+        <b>100</b> CFA
+      </span>
     </v-toolbar>
 
     <v-row no-gutters>
       <v-col>
         <v-img
           :aspect-ratio="1"
-          max-width="375"
-          max-height="376"
           :src="auction.product.img_path"
           class="grey lighten-2 mx-auto mt-5"
         ></v-img>
+        <span
+          class="grey--text text--darken-1 caption ml-5"
+        >Fin {{ moment(auction.end_date).locale('fr').fromNow() }}</span>
       </v-col>
       <v-col>
-        <bet-history :bets="auction.bets"></bet-history>
+        <bet-history :bets="bets"></bet-history>
       </v-col>
     </v-row>
-
+    <hr />
     <!-- Auction description -->
-    <v-card-text>{{ auction.product.desc }}</v-card-text>
+    <div id="chat-box">
+      <v-card-text>{{ auction.product.desc }}</v-card-text>
+    </div>
 
     <v-spacer></v-spacer>
 
     <!-- Footer Button -->
     <v-toolbar flat>
-      <v-btn text icon>
-        <v-icon>exit_to_app</v-icon>
-      </v-btn>
+      <br />
 
-      <v-spacer></v-spacer>
-      <v-btn depressed small color="success" @click="dialogMise = true">
-        <span>Mise</span>
-      </v-btn>
-      <v-spacer></v-spacer>
-      <v-btn depressed small color="primary">
+      <v-text-field v-model="message" label="Votre message"></v-text-field>
+      <!-- <v-btn depressed small color="primary">
         <span>Prix Total: 10</span>
-      </v-btn>
+      </v-btn>-->
     </v-toolbar>
+
+    <v-btn depressed small color="success" @click="dialogMise = true" block tile>
+      <span>Jouer</span>
+    </v-btn>
 
     <!-- Dialog mise -->
     <v-dialog v-model="dialogMise" width="500">
@@ -98,15 +99,27 @@ export default {
       moment: moment,
       dialogMise: false,
       mises: [1, 5, 10, 50],
-      miseSelected: null
+      miseSelected: null,
+      // message for the chat
+      message: ""
     };
+  },
+  computed: {
+    bets() {
+      const bets = [];
+      bets.push(this.auction.bets[this.auction.bets.length - 1]);
+      bets.push(this.auction.bets[this.auction.bets.length - 2]);
+      bets.push(this.auction.bets[this.auction.bets.length - 3]);
+      return bets;
+    }
   },
   methods: {
     miser() {
-      axios
-        .post("/auction/mise", {
-          id: this.auction.id,
-          price: this.miseSelected
+      this.$store
+        .dispatch("miser", {
+          auction_id: this.auction.id,
+          price: this.miseSelected,
+          user_id: this.$store.getters.currentUser.id
         })
         .then(data => {
           this.$emit("newMise", data.data.bet);

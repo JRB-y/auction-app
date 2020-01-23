@@ -16,6 +16,7 @@
         icon="mdi-alert"
       >Impossible de se connecter</v-alert>
       <v-form autocomplete="off" @submit.prevent="login" method="post">
+        <!-- Email -->
         <v-text-field
           label="Email"
           name="email"
@@ -24,7 +25,7 @@
           color="primary"
           v-model="user.email"
         />
-
+        <!-- Password -->
         <v-text-field
           id="password"
           label="Password"
@@ -34,13 +35,36 @@
           type="password"
           v-model="user.password"
         />
+        <!-- submit btn -->
         <v-btn type="submit" dark class="mr-4" color="primary" depressed small block>Connexion</v-btn>
       </v-form>
+
+      <!-- Social BTN -->
+      <v-divider class="mt-5 mb-5"></v-divider>
+      <p class="mt-5">Ou vous pouvez créer un compte avec les réseau sociaux</p>
+      <v-btn
+        class="ma-2 white--text"
+        block
+        depressed
+        small
+        style="background-color: #3578E5"
+        @click="AuthProvider('facebook')"
+      >
+        Facebook
+        <v-icon right dark></v-icon>
+      </v-btn>
+      <v-btn class="ma-2 white--text" block depressed small style="background-color: #de5246">
+        Google
+        <v-icon right dark></v-icon>
+      </v-btn>
     </v-card>
   </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
+  name: "Login",
   data() {
     return {
       user: {
@@ -53,25 +77,14 @@ export default {
   mounted() {},
   methods: {
     login() {
-      // get the redirect object
-      var redirect = this.$auth.redirect();
-      var app = this;
-      this.$auth.login({
-        params: {
-          email: app.user.email,
-          password: app.user.password
-        },
-        success: function() {
-          // handle redirection
-          // const redirectTo = redirect ? redirect.form.name : this.$auth.user().role ===
-          this.$router.push("/");
-        },
-        error: function() {
-          app.has_error = true;
-        },
-        rememberMe: true,
-        fetchUser: true
-      });
+      this.$store
+        .dispatch("retriveToken", {
+          email: this.user.email,
+          password: this.user.password
+        })
+        .then(response => {
+          this.$router.push({ name: "home" });
+        });
     }
   }
 };

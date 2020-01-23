@@ -9,6 +9,11 @@
   box-shadow: none !important;
 }
 
+.btn-deja-participe {
+  background: #f39d007d !important;
+  color: #2c2c2c !important;
+}
+
 var map = {
 	"./af": "./node_modules/moment/locale/af.js",
 	"./af.js": "./node_modules/moment/locale/af.js",

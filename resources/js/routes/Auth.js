@@ -4,7 +4,7 @@ export default [
     name: 'login',
     component: () => import('../components/Auth/Login.vue'),
     meta: {
-      auth: false
+      requiresVisitor: true
     }
   },
   {
@@ -12,7 +12,7 @@ export default [
     name: 'register',
     component: () => import('../components/Auth/Register.vue'),
     meta: {
-      auth: false
+      requiresVisitor: true
     }
   },
 ]

@@ -9,6 +9,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -50,7 +52,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Login",
   data: function data() {
     return {
       user: {
@@ -63,24 +88,15 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   methods: {
     login: function login() {
-      // get the redirect object
-      var redirect = this.$auth.redirect();
-      var app = this;
-      this.$auth.login({
-        params: {
-          email: app.user.email,
-          password: app.user.password
-        },
-        success: function success() {
-          // handle redirection
-          // const redirectTo = redirect ? redirect.form.name : this.$auth.user().role ===
-          this.$router.push("/");
-        },
-        error: function error() {
-          app.has_error = true;
-        },
-        rememberMe: true,
-        fetchUser: true
+      var _this = this;
+
+      this.$store.dispatch("retriveToken", {
+        email: this.user.email,
+        password: this.user.password
+      }).then(function (response) {
+        _this.$router.push({
+          name: "home"
+        });
       });
     }
   }
@@ -213,6 +229,45 @@ var render = function() {
                 },
                 [_vm._v("Connexion")]
               )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-divider", { staticClass: "mt-5 mb-5" }),
+          _vm._v(" "),
+          _c("p", { staticClass: "mt-5" }, [
+            _vm._v("Ou vous pouvez créer un compte avec les réseau sociaux")
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "ma-2 white--text",
+              staticStyle: { "background-color": "#3578E5" },
+              attrs: { block: "", depressed: "", small: "" },
+              on: {
+                click: function($event) {
+                  return _vm.AuthProvider("facebook")
+                }
+              }
+            },
+            [
+              _vm._v("\n      Facebook\n      "),
+              _c("v-icon", { attrs: { right: "", dark: "" } })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "ma-2 white--text",
+              staticStyle: { "background-color": "#de5246" },
+              attrs: { block: "", depressed: "", small: "" }
+            },
+            [
+              _vm._v("\n      Google\n      "),
+              _c("v-icon", { attrs: { right: "", dark: "" } })
             ],
             1
           )

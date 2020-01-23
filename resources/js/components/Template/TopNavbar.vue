@@ -11,12 +11,20 @@
       <v-spacer></v-spacer>
 
       <!-- Logged Se connecter -->
-      <router-link to="/login" v-if="!$auth.check()">
-        <v-btn depressed small color="primary" class="ma-2 white--text">Se Connecter</v-btn>
+      <!-- v-if="!$auth.check()" -->
+      <router-link to="/login">
+        <v-btn
+          v-if="!loggedIn"
+          depressed
+          small
+          color="primary"
+          class="ma-2 white--text"
+        >Se Connecter</v-btn>
       </router-link>
 
       <!-- Unlogged Se connecter -->
-      <dropdown-login v-if="$auth.check()"></dropdown-login>
+      <!-- v-if="$auth.check()" -->
+      <dropdown-login v-if="loggedIn"></dropdown-login>
 
       <!-- Categories items -->
       <template v-slot:extension>
@@ -83,6 +91,11 @@ export default {
       drawer: false,
       links: ["Home", "A propos", "Contact"]
     };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.getters.loggedIn;
+    }
   },
   methods: {}
 };

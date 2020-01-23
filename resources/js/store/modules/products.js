@@ -11,6 +11,10 @@ export default {
     }
   },
 
+  mutations: {
+
+  },
+
   actions: {
     getAllProducts(state) {
       axios.get("/product").then(data => {
