@@ -19,7 +19,7 @@
       <!-- ===== Col Left  ===== -->
       <v-col>
         <!-- ==== Image -->
-        <v-img :aspect-ratio="1" :src="auction.product.img_path"></v-img>
+        <v-img :aspect-ratio="1" max-height="376" max-width="375" :src="auction.product.img_path"></v-img>
 
         <!-- TODO: need to find a better place for the date_end  -->
         <!-- <span
