@@ -2,6 +2,22 @@ const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
+ | Public Folder Path
+ |--------------------------------------------------------------------------
+ | 
+ | Here we can provide a public folder path and a path for chunks.
+ |
+ */
+
+mix.setPublicPath('public');
+mix.webpackConfig({
+  output: {
+    chunkFilename: 'js/[name].js',
+  },
+});
+
+/*
+ |--------------------------------------------------------------------------
  | Mix Asset Management
  |--------------------------------------------------------------------------
  |
@@ -12,4 +28,6 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+  .sass('resources/sass/app.scss', 'public/css');
+
+
