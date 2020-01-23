@@ -10,55 +10,52 @@
 
       <v-spacer></v-spacer>
       <span class="subtitle-2 success--text">
-        PRIX:
         <b>100</b> CFA
       </span>
     </v-toolbar>
 
-    <v-row no-gutters>
+    <!-- ==== 2 cols: Image  / Bets and button 'jouer' -->
+    <v-row no-gutters class="mt-3 mx-auto mr-3 mb-3">
+      <!-- ===== Col Left  ===== -->
       <v-col>
-        <v-img
-          :aspect-ratio="1"
-          :src="auction.product.img_path"
-          class="grey lighten-2 mx-auto mt-5"
-        ></v-img>
-        <span
+        <!-- ==== Image -->
+        <v-img :aspect-ratio="1" :src="auction.product.img_path"></v-img>
+
+        <!-- TODO: need to find a better place for the date_end  -->
+        <!-- <span
           class="grey--text text--darken-1 caption ml-5"
-        >Fin {{ moment(auction.end_date).locale('fr').fromNow() }}</span>
+        >Fin {{ moment(auction.end_date).locale('fr').fromNow() }}</span>-->
       </v-col>
+      <!-- ===== Col Right  ===== -->
       <v-col>
+        <!-- ==== Bet History ==== -->
         <bet-history :bets="bets"></bet-history>
+        <!-- ==== Btn Jouer -->
+        <v-btn depressed small color="primary" @click="dialogMise = true" block tile>
+          <span>Mise</span>
+        </v-btn>
       </v-col>
     </v-row>
-    <hr />
+    <!--  -->
     <!-- Auction description -->
-    <div id="chat-box">
-      <v-card-text>{{ auction.product.desc }}</v-card-text>
-    </div>
 
     <v-spacer></v-spacer>
-
+    <v-container>
+      <div id="chat-box">
+        <h1 class="title">Messages</h1>
+        <v-card-text>{{ auction.product.desc }}</v-card-text>
+      </div>
+    </v-container>
     <!-- Footer Button -->
     <v-toolbar flat>
-      <br />
-
       <v-text-field v-model="message" label="Votre message"></v-text-field>
-      <!-- <v-btn depressed small color="primary">
-        <span>Prix Total: 10</span>
-      </v-btn>-->
     </v-toolbar>
-
-    <v-btn depressed small color="success" @click="dialogMise = true" block tile>
-      <span>Jouer</span>
-    </v-btn>
 
     <!-- Dialog mise -->
     <v-dialog v-model="dialogMise" width="500">
       <v-card class="mx-auto">
         <v-card-title>
           <h2 class="display-1">{{auction.product.name}}</h2>
-          <v-spacer></v-spacer>
-          <span class="title">40 FCA</span>
         </v-card-title>
 
         <v-card-text>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt modi eius omnis reiciendis culpa ipsum, praesentium harum placeat sapiente aliquid ex porro perferendis veritatis ducimus tempore iusto voluptas? Sit, iste..</v-card-text>
@@ -66,7 +63,7 @@
         <v-divider class="mx-4"></v-divider>
 
         <v-card-text>
-          <span class="subheading">Votre mise</span>
+          <span class="subheading">Vous pouvez miser:</span>
 
           <v-chip-group
             v-model="miseSelected"
@@ -78,7 +75,13 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-btn block class="white--text" color="primary accent-4" @click="miser">Miser</v-btn>
+          <v-btn
+            block
+            class="white--text"
+            color="primary accent-4"
+            @click="miser"
+            :loading="miseIsLoading"
+          >Valider</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -101,7 +104,8 @@ export default {
       mises: [1, 5, 10, 50],
       miseSelected: null,
       // message for the chat
-      message: ""
+      message: "",
+      miseIsLoading: false
     };
   },
   computed: {
@@ -115,6 +119,7 @@ export default {
   },
   methods: {
     miser() {
+      this.miseIsLoading = true;
       this.$store
         .dispatch("miser", {
           auction_id: this.auction.id,
@@ -123,8 +128,9 @@ export default {
         })
         .then(data => {
           this.$emit("newMise", data.data.bet);
-          this.dialogMise = false;
           this.miseSelected = null;
+          this.dialogMise = false;
+          this.miseIsLoading = false;
         });
     }
   }
