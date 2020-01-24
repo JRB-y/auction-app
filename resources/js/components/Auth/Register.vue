@@ -82,8 +82,7 @@ export default {
         name: "",
         email: "",
         password: "",
-        password_confirmation: "",
-        inset: false
+        password_confirmation: ""
       },
       has_error: false
     };
@@ -91,26 +90,8 @@ export default {
   mounted() {},
   methods: {
     register() {
-      // get the redirect object
-      var redirect = this.$auth.redirect();
-      var app = this;
-      this.$auth.register({
-        params: {
-          name: app.user.name,
-          email: app.user.email,
-          password: app.user.password,
-          password_confirmation: app.user.password_confirmation
-        },
-        success: function() {
-          // handle redirection
-          // const redirectTo = redirect ? redirect.form.name : this.$auth.user().role ===
-          this.$router.push("/login");
-        },
-        error: function() {
-          app.has_error = true;
-        },
-        rememberMe: true,
-        fetchUser: true
+      this.$store.dispatch("register", this.user).then(response => {
+        this.$router.push({ name: "login" });
       });
     }
   }
