@@ -36,7 +36,16 @@
           v-model="user.password"
         />
         <!-- submit btn -->
-        <v-btn type="submit" dark class="mr-4" color="primary" depressed small block>Connexion</v-btn>
+        <v-btn
+          type="submit"
+          dark
+          class="mr-4"
+          color="primary"
+          depressed
+          small
+          block
+          :loading="loading"
+        >Connexion</v-btn>
       </v-form>
 
       <!-- Social BTN -->
@@ -71,19 +80,25 @@ export default {
         email: "",
         password: ""
       },
-      has_error: false
+      has_error: false,
+      loading: false
     };
   },
   mounted() {},
   methods: {
     login() {
+      this.loading = true;
       this.$store
         .dispatch("retriveToken", {
           email: this.user.email,
           password: this.user.password
         })
         .then(response => {
+          this.loading = false;
           this.$router.push({ name: "home" });
+        })
+        .catch(err => {
+          this.loading = false;
         });
     }
   }

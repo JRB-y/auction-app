@@ -16,7 +16,11 @@
         elevation="2"
         colored-border
         icon="mdi-alert"
-      >Impossible de se connecter</v-alert>
+      >
+        <ul>
+          <li v-for="(err, index) in err_bag" :key="index">{{err[0]}}</li>
+        </ul>
+      </v-alert>
 
       <v-form autocomplete="off" @submit.prevent="register" method="post">
         <v-text-field
@@ -37,6 +41,13 @@
           color="primary"
           v-model="user.email"
         />
+        <v-text-field
+          v-model="user.phone"
+          type="number"
+          label="Numéro de téléphone"
+          prepend-icon="phone"
+          hint="Le téléphone n'est pas obligatoire"
+        ></v-text-field>
 
         <v-text-field
           id="password"
@@ -58,7 +69,16 @@
           v-model="user.password_confirmation"
         />
 
-        <v-btn type="submit" dark class="mr-4" color="primary" depressed small block>Enristrer</v-btn>
+        <v-btn
+          type="submit"
+          dark
+          class="mr-4"
+          color="primary"
+          depressed
+          small
+          block
+          :loading="loading"
+        >Enristrer</v-btn>
 
         <v-divider class="mt-5"></v-divider>
         <p class="mt-5">Ou vous pouvez créer un compte avec les réseau sociaux</p>
@@ -82,17 +102,29 @@ export default {
         name: "",
         email: "",
         password: "",
-        password_confirmation: ""
+        password_confirmation: "",
+        phone: ""
       },
-      has_error: false
+      has_error: false,
+      err_bag: "",
+      loading: false
     };
   },
   mounted() {},
   methods: {
     register() {
-      this.$store.dispatch("register", this.user).then(response => {
-        this.$router.push({ name: "login" });
-      });
+      this.loading = true;
+      this.$store
+        .dispatch("register", this.user)
+        .then(response => {
+          this.loading = false;
+          this.$router.push({ name: "login" });
+        })
+        .catch(err => {
+          this.loading = false;
+          this.err_bag = err.response.data.errors;
+          this.has_error = true;
+        });
     }
   }
 };
