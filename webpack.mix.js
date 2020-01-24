@@ -5,7 +5,7 @@ const mix = require('laravel-mix');
  | Public Folder Path
  |--------------------------------------------------------------------------
  | 
- | Here we can provide a public folder path and a path for chunks.
+ | Here we can provide a public folder path and chunks path.
  |
  */
 
