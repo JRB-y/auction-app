@@ -94,7 +94,7 @@ import BetHistory from "./BetHistory";
 import moment from "moment";
 
 export default {
-  name: "UnliveAuction",
+  name: "LiveAuction",
   props: ["auction"],
   components: { BetHistory },
   data() {
@@ -116,9 +116,16 @@ export default {
   computed: {
     bets() {
       const bets = [];
-      bets.push(this.auction.bets[this.auction.bets.length - 1]);
-      bets.push(this.auction.bets[this.auction.bets.length - 2]);
-      bets.push(this.auction.bets[this.auction.bets.length - 3]);
+      if (this.auction.bets.length !== 0) {
+        if (this.auction.bets[this.auction.bets.length - 1])
+          bets.push(this.auction.bets[this.auction.bets.length - 1]);
+
+        if (this.auction.bets[this.auction.bets.length - 2])
+          bets.push(this.auction.bets[this.auction.bets.length - 2]);
+
+        if (this.auction.bets[this.auction.bets.length - 3])
+          bets.push(this.auction.bets[this.auction.bets.length - 3]);
+      }
       return bets;
     }
   },
