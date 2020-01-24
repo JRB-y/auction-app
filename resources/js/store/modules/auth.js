@@ -81,6 +81,16 @@ export default {
             })
         })
       }
+    },
+    register(context, credentials) {
+      if (!context.getters.loggedIn) {
+        return new Promise((resolve, reject) => {
+          axios
+            .post('/auth/register', credentials)
+            .then(response => resolve(response))
+            .catch(err => reject(err));
+        });
+      }
     }
   }
 }
