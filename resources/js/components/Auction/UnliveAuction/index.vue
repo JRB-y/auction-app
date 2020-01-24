@@ -46,7 +46,7 @@
         depressed
         @click="goToLoginPage"
         v-if="!this.$store.getters.loggedIn"
-      >Connection</v-btn>
+      >Participer ({{auction.entry_price }} CFA)</v-btn>
       <!--  -->
       <!--  -->
       <!--  -->

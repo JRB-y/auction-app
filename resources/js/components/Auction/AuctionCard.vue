@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="300" class="ma-1" outlined @click="auctionClicked(auction.id)">
+  <v-card max-width="300" class="ma-1" outlined @click="auctionClicked(auction)">
     <!-- Title and start_date -->
     <v-list-item>
       <v-list-item-content>
@@ -18,13 +18,6 @@
 
     <!-- Auction description -->
     <v-card-text v-text="auction.product.desc.substring(0, 100)"></v-card-text>
-
-    <!-- Details and participer btns -->
-    <!-- <v-card-actions> -->
-    <!-- <v-btn depressed small color="warning">5$</v-btn> -->
-    <!-- <v-spacer></v-spacer> -->
-    <!-- <v-btn depressed small color="success accent-4">Participer</v-btn> -->
-    <!-- </v-card-actions> -->
   </v-card>
 </template>
 <script>
@@ -38,11 +31,12 @@ export default {
     };
   },
   methods: {
-    auctionClicked: function(auctionID) {
-      if (auctionID !== undefined)
+    auctionClicked: function(auction) {
+      if (!this.$store.getters.loggedIn && auction.is_live) return null;
+      if (auction.id !== undefined)
         this.$router.push({
           name: "auction-details",
-          params: { id: auctionID }
+          params: { id: auction.id }
         });
     }
   },

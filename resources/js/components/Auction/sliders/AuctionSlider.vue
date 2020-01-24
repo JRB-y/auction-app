@@ -13,7 +13,7 @@
     <v-slide-group show-arrows center-active>
       <v-slide-item v-for="auction in auctions" :key="auction.id">
         <!-- ===== Signle Auction Card ===== -->
-        <auction-card :auction="auction"></auction-card>
+        <auction-card :auction="auction" max-width="1"></auction-card>
 
         <!-- ===== End Signle Auction Card ===== -->
       </v-slide-item>

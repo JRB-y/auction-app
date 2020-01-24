@@ -108,6 +108,11 @@ export default {
       miseIsLoading: false
     };
   },
+  beforeCreate() {
+    if (!this.$store.getters.loggedIn) {
+      this.$router.push({ name: "home" });
+    }
+  },
   computed: {
     bets() {
       const bets = [];
