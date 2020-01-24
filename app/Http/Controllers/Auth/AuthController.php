@@ -49,6 +49,7 @@ class AuthController extends Controller
 
         $v = Validator::make($request->all(), [
             'name' => 'required',
+            'phone' => 'numeric',
             'email' => 'required|email|unique:users',
             'password'  => 'required|min:3|confirmed'
         ]);
@@ -64,6 +65,7 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->phone = $request->phone;
         $user->is_admin = 0;
         $user->save();
         return response()->json(['status' => 'success'], 200);
