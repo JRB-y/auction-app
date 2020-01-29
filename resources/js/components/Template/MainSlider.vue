@@ -15,8 +15,8 @@ export default {
   data() {
     return {
       colors: [
-        "indigo",
         "warning",
+        "indigo",
         "pink darken-2",
         "red lighten-1",
         "deep-purple accent-4"

@@ -6,7 +6,7 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <!-- Application title / logo -->
-      <v-toolbar-title class="font-weight-bold">AUCTION APP</v-toolbar-title>
+      <v-toolbar-title class="font-weight-bold">CKADOO</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
