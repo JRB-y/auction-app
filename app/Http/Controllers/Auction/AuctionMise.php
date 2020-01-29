@@ -12,9 +12,11 @@ class AuctionMise extends Controller
 {
     public function handle(Request $request)
     {
-        // get the user
+        // user
         $user_id = $request->user_id;
+        // auction
         $auction_id = $request->auction_id;
+        // mise price as integer
         $price = intval($request->price);
 
         $bet = Bet::create([
@@ -23,7 +25,22 @@ class AuctionMise extends Controller
             'price' => $price
         ]);
 
-        $bet = Bet::find($bet->id);
+
+        /**
+         * Calculate final_price
+         * - get all bets of the auction
+         * - sum all bets
+         * - update auction final_price
+         */
+        $auction = Auction::find($auction_id);
+        $final_price = 0;
+
+        foreach ($auction->bets as $bet) {
+            $final_price += $bet->price;
+        }
+
+        $auction->final_price = $final_price;
+        $auction->save();
 
         if ($bet) {
             $data = [

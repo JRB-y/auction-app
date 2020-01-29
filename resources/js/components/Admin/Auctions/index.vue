@@ -18,12 +18,17 @@
         :search="search"
         @editClicked="editAuction"
         @deleteClicked="deleteAuction"
+        @showResultat="showResultat"
         @goLive="goLive"
       ></auction-list>
     </v-card>
     <!-- dialog btn -->
     <v-dialog v-model="dialog">
       <auction-form :editedAuction="editedAuction" @save="save"></auction-form>
+    </v-dialog>
+
+    <v-dialog v-model="auctionResult">
+      <auction-resultat :resultat="resultat"></auction-resultat>
     </v-dialog>
   </admin-layout>
 </template>
@@ -34,9 +39,11 @@ import AdminLayout from "../AdminLayout";
 
 import AuctionList from "../../Auction/AuctionList";
 import AuctionForm from "../../Auction/AuctionForm";
+// auction resultat in dialog
+import AuctionResultat from "./AuctionResultat";
 
 export default {
-  components: { AdminLayout, AuctionList, AuctionForm },
+  components: { AdminLayout, AuctionList, AuctionForm, AuctionResultat },
   data() {
     return {
       auctions: [],
@@ -70,7 +77,9 @@ export default {
         },
         price: ""
       },
-      editedIndex: -1
+      editedIndex: -1,
+      auctionResult: false,
+      resultat: null
     };
   },
   mounted() {
@@ -144,7 +153,13 @@ export default {
         auction.is_live = !auction.is_live;
       });
     },
-
+    showResultat: function(item) {
+      // We need to get the last auctions and the total price of the auction.
+      // All Auctions
+      console.log(item);
+      this.resultat = item.bets;
+      this.auctionResult = true;
+    },
     setForm: function(formData, method = "POST") {
       formData.append("date_start", this.editedAuction.date_start || "");
       formData.append("date_end", this.editedAuction.date_end || "");

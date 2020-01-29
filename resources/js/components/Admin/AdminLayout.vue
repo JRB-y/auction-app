@@ -5,9 +5,10 @@
 
       <v-spacer></v-spacer>
       <v-toolbar-items>
+        <v-btn text :to="{ name: 'admin-backend' }">Dashboard</v-btn>
         <v-btn text :to="{ name: 'admin-products' }">Produits</v-btn>
         <v-btn text :to="{ name: 'admin-auctions' }">Enchères</v-btn>
-        <v-btn text disabled>Statistiques</v-btn>
+        <!-- <v-btn text disabled>Statistiques</v-btn> -->
       </v-toolbar-items>
     </v-toolbar>
 

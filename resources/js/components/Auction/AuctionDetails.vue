@@ -31,8 +31,8 @@ export default {
       });
     },
     newMise: function(bet) {
-      console.log(bet);
       this.auction.bets.push(bet);
+      this.getAuction();
     },
     userParticipatedEvent() {
       // After the user click on 'confirme participation' we need to refresh the

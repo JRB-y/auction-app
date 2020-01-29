@@ -35,14 +35,14 @@
         <!--  -->
         <!--  -->
         <!-- States BTN -->
-        <v-list-item link>
+        <!-- <v-list-item link>
           <v-list-item-icon>
             <v-icon>bar_chart</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>States</v-list-item-title>
           </v-list-item-content>
-        </v-list-item>
+        </v-list-item> -->
         <!--  -->
         <!--  -->
         <!-- Logout btn -->

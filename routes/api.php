@@ -58,22 +58,9 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 });
 
 
-
 /**
- * Authentication API endpoints 
+ * Bets
  */
-// Route::prefix('auth')->group(function () {
-//     // register
-//     Route::post('register', 'AuthController@register');
-//     // login
-//     Route::post('login', 'AuthController@login');
-//     // refresh token
-//     Route::get('refresh', 'AuthController@refresh');
-
-//     Route::group(['middleware' => 'auth:api'], function () {
-//         // get the user
-//         Route::get('user', 'AuthController@user');
-//         // logout
-//         Route::post('logout', 'AuthController@logout');
-//     });
-// });
+Route::group(['middleware' => 'api', 'prefix' => 'bets'], function () {
+    Route::get('last', 'Bet\BetController@last');
+});

@@ -16,6 +16,11 @@
       <v-icon @click="goLive(item)" v-else>check_circle</v-icon>
     </template>
 
+    <!-- Resultat Buttons -->
+    <template v-slot:item.res="{ item }">
+      <v-icon @click="resultatAuction(item)" class="mr-2" color="success">done_outline</v-icon>
+    </template>
+
     <!-- Edit Buttons -->
     <template v-slot:item.action="{ item }">
       <v-icon @click="editClicked(item)" class="mr-2">edit</v-icon>
@@ -45,6 +50,7 @@ export default {
         { text: "Entrée", value: "entry_price", sortable: true },
         { text: "Participants", value: "room_size", sortable: true },
         { text: "Création", value: "created_at", sortable: true },
+        { text: "Résultat", value: "res", sortable: false },
         { text: "Live", value: "is_live", sortable: false },
         { text: "action", value: "action", sortable: false }
       ]
@@ -59,6 +65,9 @@ export default {
     },
     goLive(item) {
       this.$emit("goLive", item);
+    },
+    resultatAuction(item) {
+      this.$emit("showResultat", item);
     }
   }
 };

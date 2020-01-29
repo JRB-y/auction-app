@@ -1,7 +1,7 @@
 <template>
   <div class="welcome">
     <!-- ==== Main Slider ==== -->
-    <!-- <main-slider class="mb-4"></main-slider> -->
+    <main-slider class="mb-4"></main-slider>
 
     <!-- ==== My Participated Auctions  ==== -->
     <!-- v-if="$auth.check()" -->
@@ -32,11 +32,13 @@
 
 <script>
 import AuctionSlider from "./Auction/sliders/AuctionSlider";
+import MainSlider from "./Template/MainSlider";
+
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Welcome",
-  components: { AuctionSlider },
+  components: { AuctionSlider, MainSlider },
   created() {
     this.$store.dispatch("onlineAuctions");
     this.$store.dispatch("upcomingAuctions");

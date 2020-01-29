@@ -9,8 +9,8 @@
       <v-toolbar-title>{{auction.product.name}}</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <span class="subtitle-2 success--text">
-        <b>100</b> CFA
+      <span class="success--text">
+        <b>{{finalPrice}}</b> CFA
       </span>
     </v-toolbar>
 
@@ -43,11 +43,14 @@
     <v-container>
       <div id="chat-box">
         <h1 class="title">Messages</h1>
-        <v-card-text>{{ auction.product.desc }}</v-card-text>
+        <!-- <v-card-text>{{ auction.product.desc }}</v-card-text> -->
+        <div v-for="(message, index) in messages" :key="index">
+          <span>User: {{message}}</span>
+        </div>
       </div>
     </v-container>
     <!-- Footer Button -->
-    <v-toolbar flat>
+    <v-toolbar flat v-on:keyup.enter="submitMsg">
       <v-text-field v-model="message" label="Votre message"></v-text-field>
     </v-toolbar>
 
@@ -105,13 +108,17 @@ export default {
       miseSelected: null,
       // message for the chat
       message: "",
-      miseIsLoading: false
+      miseIsLoading: false,
+      messages: []
     };
   },
   beforeCreate() {
     if (!this.$store.getters.loggedIn) {
       this.$router.push({ name: "home" });
     }
+  },
+  created() {
+    console.log(this.auction);
   },
   computed: {
     bets() {
@@ -127,6 +134,9 @@ export default {
           bets.push(this.auction.bets[this.auction.bets.length - 3]);
       }
       return bets;
+    },
+    finalPrice() {
+      return this.auction.final_price;
     }
   },
   methods: {
@@ -144,6 +154,10 @@ export default {
           this.dialogMise = false;
           this.miseIsLoading = false;
         });
+    },
+    submitMsg() {
+      this.messages.push(this.message);
+      this.message = "";
     }
   }
 };

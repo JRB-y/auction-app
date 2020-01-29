@@ -26,3 +26,8 @@
 .primary-active {
   background: #3f51b57a;
 }
+
+#result-bets-box {
+  max-height: 350px;
+  overflow: auto;
+}
