@@ -7,7 +7,7 @@
       <v-list-item-group v-if="bets.lenght !== 0">
         <!--  :class="{'primary-active': index === 0}" -->
         <div v-for="(bet, index) in bets" :key="bet.title">
-          <v-list-item :class="{'success': index === 0}">
+          <v-list-item :class="{'green': index === 0}">
             <v-list-item-content :class="{ 'white--text': index === 0 }">
               <!-- ==== User name ==== -->
               <v-list-item-title>

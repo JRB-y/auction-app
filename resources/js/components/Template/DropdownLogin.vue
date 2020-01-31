@@ -1,7 +1,9 @@
 <template>
   <v-menu v-model="menu" :close-on-content-click="true" :nudge-width="200" offset-x class="mr-5">
     <template v-slot:activator="{ on }">
-      <v-icon v-on="on" large>account_circle</v-icon>
+      <v-btn icon v-on="on" large>
+        <v-icon large>account_circle</v-icon>
+      </v-btn>
     </template>
 
     <v-card>
@@ -23,7 +25,7 @@
         <!--  -->
         <!--  -->
         <!-- Logged as admin -->
-        <v-list-item link @click="adminPanel">
+        <v-list-item link @click="adminPanel" v-if="this.$store.getters.currentUser.is_admin">
           <v-list-item-icon>
             <v-icon>apps</v-icon>
           </v-list-item-icon>
@@ -42,7 +44,7 @@
           <v-list-item-content>
             <v-list-item-title>States</v-list-item-title>
           </v-list-item-content>
-        </v-list-item> -->
+        </v-list-item>-->
         <!--  -->
         <!--  -->
         <!-- Logout btn -->

@@ -73,7 +73,7 @@
           type="submit"
           dark
           class="mr-4"
-          color="primary"
+          color="green"
           depressed
           small
           block

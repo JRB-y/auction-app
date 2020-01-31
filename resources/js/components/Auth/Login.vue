@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="pr-5 pl-5 mx-auto pb-5" max-width="500" outlined>
-      <H1 class="title">SE CONNECTER</H1>
+      <H1 class="title display-1">SE CONNECTER</H1>
       <v-list-item-subtitle>
         Si vous n'avez pas de compte vous pouvez
         <router-link to="/register">créer</router-link>un rapiement.
@@ -40,7 +40,7 @@
           type="submit"
           dark
           class="mr-4"
-          color="primary"
+          color="green"
           depressed
           small
           block

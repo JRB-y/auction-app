@@ -1,29 +1,26 @@
 <template>
   <nav>
     <v-app-bar color="grey darken-4" dark flat app>
-      <!-- Toggle drawer (menu) -->
-      <!-- <v-toolbar-side-icon class="gray"></v-toolbar-side-icon> -->
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
       <!-- Application title / logo -->
-      <v-toolbar-title class="font-weight-bold">CKADOO</v-toolbar-title>
+      <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
+      <v-toolbar-title class="font-weight-bold">CKADOO ;)</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <!-- Logged Se connecter -->
-      <!-- v-if="!$auth.check()" -->
-      <router-link to="/login">
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn text small to="/">Accueil</v-btn>
+        <v-btn text small>A Propos</v-btn>
+        <v-btn text small>Contact</v-btn>
+        <v-btn text small to="/login" v-if="!this.$store.getters.currentUser">Connexion</v-btn>
         <v-btn
-          v-if="!loggedIn"
-          depressed
+          text
           small
           color="primary"
-          class="ma-2 white--text"
-        >Se Connecter</v-btn>
-      </router-link>
+          to="/register"
+          v-if="!this.$store.getters.currentUser"
+        >S'inscrire</v-btn>
+      </v-toolbar-items>
 
-      <!-- Unlogged Se connecter -->
-      <!-- v-if="$auth.check()" -->
       <dropdown-login v-if="loggedIn"></dropdown-login>
 
       <!-- Categories items -->
@@ -32,14 +29,18 @@
           <v-tab to="/" ripple class="primary">
             <v-icon>home</v-icon>
           </v-tab>
-          <v-tab class="white--text">A propos</v-tab>
-          <v-tab class="white--text">Contact</v-tab>
+          <v-tab class="white--text" :to="{name: 'upcoming-auctions' }">
+            <v-icon small color="primary" class="mr-1">mdi-checkbox-blank-circle</v-icon>Prochaines
+          </v-tab>
+          <v-tab class="white--text" :to="{name: 'live-auctions'}">
+            <v-icon small color="green" class="mr-1">mdi-checkbox-blank-circle</v-icon>En ligne
+          </v-tab>
           <v-tabs-slider color="primary"></v-tabs-slider>
         </v-tabs>
       </template>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" app dark class="primary">
+    <v-navigation-drawer v-model="drawer" app dark class="green hidden-md-and-up">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">Application</v-list-item-title>
@@ -49,13 +50,13 @@
 
       <v-divider></v-divider>
 
-      <v-list dense nav dark>
-        <v-list-item link>
+      <v-list dense nav>
+        <v-list-item link to="/">
           <v-list-item-icon>
             <v-icon>home</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="white--text">Home</v-list-item-title>
+            <v-list-item-title class="white--text">Accueil</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -76,6 +77,18 @@
 
           <v-list-item-content>
             <v-list-item-title class="white--text">Contact</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link to="/login" v-if="!this.$store.getters.loggedIn">
+          <v-list-item-content>
+            <v-list-item-title class="white--text">Connexion</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link to="/register" v-if="!this.$store.getters.loggedIn">
+          <v-list-item-content>
+            <v-list-item-title class="white--text">S'inscrire</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

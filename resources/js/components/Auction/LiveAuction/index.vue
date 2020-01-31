@@ -1,15 +1,15 @@
 <template>
   <v-card class="mx-auto">
     <v-toolbar dense>
-      <v-btn text icon to="/">
+      <!-- <v-btn text icon @click="$router.go(-1)">
         <v-icon>keyboard_backspace</v-icon>
-      </v-btn>
-      <v-icon small color="success">mdi-checkbox-blank-circle</v-icon>
+      </v-btn>-->
+      <v-icon small color="green" class="mr-1">mdi-checkbox-blank-circle</v-icon>
 
       <v-toolbar-title>{{auction.product.name}}</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <span class="success--text">
+      <span class="green--text display-1">
         <b>{{finalPrice}}</b> CFA
       </span>
     </v-toolbar>
@@ -158,6 +158,9 @@ export default {
     submitMsg() {
       this.messages.push(this.message);
       this.message = "";
+    },
+    goBack() {
+      window.history.go(-1);
     }
   }
 };

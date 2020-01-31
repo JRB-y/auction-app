@@ -47,14 +47,12 @@ Route::post('/participer', 'Participation\ParticipationController@participer');
  */
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 
-    Route::group(['middleware' => 'api'], function () {
-        Route::post('login', 'Auth\AuthController@login');
-        Route::post('logout', 'Auth\AuthController@logout');
-        Route::post('refresh', 'Auth\AuthController@refresh');
-        Route::post('me', 'Auth\AuthController@me');
-        // register route
-        Route::post('register', 'Auth\AuthController@register');
-    });
+    Route::post('login', 'Auth\AuthController@login');
+    Route::post('logout', 'Auth\AuthController@logout');
+    Route::post('refresh', 'Auth\AuthController@refresh');
+    Route::post('me', 'Auth\AuthController@me');
+    // register route
+    Route::post('register', 'Auth\AuthController@register');
 });
 
 
@@ -64,3 +62,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 Route::group(['middleware' => 'api', 'prefix' => 'bets'], function () {
     Route::get('last', 'Bet\BetController@last');
 });
+
+
+Route::resource('users', 'Users\UserController');

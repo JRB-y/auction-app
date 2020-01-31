@@ -8,10 +8,13 @@
       <v-layout column wrap class="my-12" align-center>
         <v-flex xs12 sm4 class="my-4">
           <div class="text-center">
-            <h1 class="display-1">Meilleurs produits au prix réduit.</h1>
-            <span
+            <h1 class="display-1 mb-5">
+              Acheter des Produits a Prix
+              <b>CKADOO</b>
+            </h1>
+            <p
               class="subheading"
-            >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora nesciunt consequatur illo. Aliquid, veniam voluptatem tempora rem quia, in distinctio praesentium minus hic ipsam, possimus neque dolore non dicta quae!</span>
+            >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora nesciunt consequatur illo. Aliquid, veniam voluptatem tempora rem quia, in distinctio praesentium minus hic ipsam, possimus neque dolore non dicta quae!</p>
           </div>
         </v-flex>
         <v-flex xs12>
@@ -23,7 +26,7 @@
                     <v-icon x-large class="primary--text">accessibility</v-icon>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
-                    <div class="headline text-center">Insription Facile</div>
+                    <div class="headline text-center">Inscription Facile</div>
                   </v-card-title>
                   <v-card-text>
                     Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
@@ -50,7 +53,7 @@
               <v-flex xs12 md4>
                 <v-card flat class="transparent">
                   <v-card-text class="text-center">
-                    <v-icon x-large class="primary--text">mdi-wrench</v-icon>
+                    <v-icon x-large class="primary--text">shopping_basket</v-icon>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
                     <div class="headline text-center">Livraison gratuite</div>
@@ -68,6 +71,9 @@
       </v-layout>
     </section>
 
+    <section class="text--center">
+      <v-btn block tile depressed color="primary">Prochaines Enchères</v-btn>
+    </section>
     <!-- Parallax -->
 
     <!-- End New Section -->
@@ -82,20 +88,20 @@
     ></auction-slider>-->
 
     <!-- ==== Auction online ==== -->
-    <auction-slider
+    <!-- <auction-slider
       :title="'Enchères en ligne'"
       :color="'success'"
       :auctions="onlineAuctions"
       :description="'Lorem Ipsum '"
-    ></auction-slider>
+    ></auction-slider>-->
 
     <!-- ==== Upcoming Auctions ==== -->
-    <auction-slider
+    <!-- <auction-slider
       :title="'Prochaines Enchères'"
       :color="'warning'"
       :auctions="upcomingAuctions"
       :description="'Lorem Ipsum '"
-    ></auction-slider>
+    ></auction-slider>-->
   </div>
 </template>
 

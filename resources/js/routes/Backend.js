@@ -5,7 +5,8 @@ export default [
     name: 'admin-backend',
     component: () => import('../components/Admin/Index'),
     meta: {
-      requiresAuth: true
+      auth: true,
+      admin: true
     }
   },
   // Admin backend (products)
@@ -13,9 +14,9 @@ export default [
     path: '/admin/backend/products',
     name: 'admin-products',
     component: () => import('../components/Admin/Products/index.vue'),
-
     meta: {
-      requiresAuth: true
+      auth: true,
+      admin: true
     }
   },
   // Admin backend (auctions)
@@ -24,7 +25,17 @@ export default [
     name: 'admin-auctions',
     component: () => import('../components/Admin/Auctions/index.vue'),
     meta: {
-      requiresAuth: true
+      auth: true,
+      admin: true
+    }
+  },
+  {
+    path: '/admin/backend/users',
+    name: 'admin-users',
+    component: () => import('../components/Admin/Users/index.vue'),
+    meta: {
+      auth: true,
+      admin: true
     }
   }
 ]

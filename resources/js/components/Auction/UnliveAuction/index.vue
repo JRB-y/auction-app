@@ -2,7 +2,7 @@
   <div>
     <v-card class="mx-auto">
       <v-toolbar dense>
-        <v-btn text icon to="/">
+        <v-btn text icon @click="this.$router.go(-1)">
           <v-icon>keyboard_backspace</v-icon>
         </v-btn>
         <v-toolbar-title>{{auction.product.name}}</v-toolbar-title>

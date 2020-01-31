@@ -53,11 +53,24 @@ axios.defaults.baseURL = `/api`;
  * Auth Middleware
  * Check if user is authenticated.
  * Checked by meta tag on router links
- * 
- * TODO: Admin Middleware
  */
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+
+  // if route require admin
+  if (to.matched.some(record => record.meta.admin)) {
+
+    if (!store.getters.currentUser.is_admin) {
+      next({
+        name: 'home'
+      })
+    } else {
+      next();
+    }
+  }
+
+  // if route require auth
+  else if (to.matched.some(record => record.meta.auth)) {
+
     // this route requires auth, check if logged in
     // if not, redirect to login page.
     if (!store.getters.loggedIn) {
@@ -65,9 +78,12 @@ router.beforeEach((to, from, next) => {
         name: 'login'
       })
     } else {
-      next()
+      next();
     }
-  } else {
+  }
+
+
+  else {
     next() // make sure to always call next()!
   }
 })

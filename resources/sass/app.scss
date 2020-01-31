@@ -1,5 +1,5 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
+// @import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
 @import url("https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css");
 
 // Variables
@@ -7,6 +7,22 @@
 
 @import "~vuetify/dist/vuetify.min.css";
 
+
+$body-font-family: 'Source Sans Pro', serif;
+$heading-font-family: 'Source Sans Pro', serif;
+
+$title-font: 'Source Sans Pro';
+
+.v-application {
+   font-family: $body-font-family, sans-serif !important;
+   .title { // To pin point specific classes of some components
+       font-family: $title-font, sans-serif !important;
+    }
+ }
+.v-application .display-1, .v-application .display-2 {
+   font-family: $body-font-family, sans-serif !important;
+
+}
 
 // v-bottom-navigation without shadow
 .v-bottom-navigation {
@@ -30,4 +46,8 @@
 #result-bets-box {
   max-height: 350px;
   overflow: auto;
+}
+
+.v-application--is-ltr .v-tabs--align-with-title > .v-tabs-bar:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content > .v-tab:first-child, .v-application--is-ltr .v-tabs--align-with-title > .v-tabs-bar:not(.v-tabs-bar--show-arrows) > .v-slide-group__wrapper > .v-tabs-bar__content > .v-tabs-slider-wrapper + .v-tab {
+  margin: 0 !important;
 }

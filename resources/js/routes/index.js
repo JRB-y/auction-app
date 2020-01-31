@@ -7,15 +7,14 @@ import home from './Home';
 
 
 const routes = [
-  ...home,
-  ...backend,
   ...auction,
+  ...backend,
   ...auth,
+  ...home,
 ];
 
 /** ===== Router declaration ===== **/
 export default new VueRouter({
-  history: true,
   mode: 'history',
-  routes,
+  routes
 })
